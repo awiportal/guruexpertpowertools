@@ -18,7 +18,6 @@ $rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
 		<div class="rk-footer__cols">
 			<div>
 				<h3><?php bloginfo( 'name' ); ?></h3>
-				<p><?php esc_html_e( 'Your trusted power-tools, solar and hardware shop on Tom Mboya Street, Nairobi. Genuine Total, Ingco, Makita, Bosch and Solarmax gear for pros and home projects, with countrywide delivery and M-PESA or pay-on-delivery.', 'toptech-machinery' ); ?></p>
 				<p><strong><?php esc_html_e( 'Address:', 'toptech-machinery' ); ?></strong><br><?php echo esc_html( $rk_address ); ?></p>
 				<p><a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $rk_phone ) ); ?>"><?php echo esc_html( $rk_phone ); ?></a> &middot; <a href="mailto:<?php echo esc_attr( $rk_email ); ?>"><?php echo esc_html( $rk_email ); ?></a></p>
 			</div>
