@@ -1,6 +1,6 @@
 <?php
 /**
- * Default page template (used by About, Policies, Contact, etc.).
+ * Default page template (About, Policies, Contact, etc.).
  *
  * @package ToptechMachinery
  */
@@ -8,7 +8,12 @@
 defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
-<main id="primary" class="site-main container" style="padding:32px 20px;max-width:900px">
+<nav class="rk-breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'toptech-machinery' ); ?>">
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'toptech-machinery' ); ?></a>
+	<span class="rk-crumb-sep" aria-hidden="true">/</span>
+	<span><?php the_title(); ?></span>
+</nav>
+<main id="primary" class="site-main container rk-content rk-content--narrow">
 	<?php
 	while ( have_posts() ) :
 		the_post();
@@ -16,6 +21,7 @@ get_header();
 		<article <?php post_class( 'rk-page' ); ?>>
 			<h1 class="page-title"><?php the_title(); ?></h1>
 			<div class="rk-page__content"><?php the_content(); ?></div>
+			<?php wp_link_pages(); ?>
 		</article>
 		<?php
 	endwhile;
