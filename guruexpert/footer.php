@@ -7,10 +7,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$rk_phone    = get_theme_mod( 'toptech_phone', '0797 720290' );
-$rk_email    = get_theme_mod( 'toptech_email', 'info@toptechmachinery.co.ke' );
-$rk_address  = get_theme_mod( 'toptech_address', 'This & That Exhibition, Opp. Ronald Ngala Post Office, Shop G15, Ronald Ngala Street, Nairobi, Kenya' );
-$rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254797720290' );
+$rk_phone    = get_theme_mod( 'toptech_phone', '+254 708 777192' );
+$rk_email    = get_theme_mod( 'toptech_email', 'info@guruexpertpowertools.co.ke' );
+$rk_address  = get_theme_mod( 'toptech_address', 'Magomano House, 1st Floor, Room 10D, Tom Mboya Street, Nairobi' );
+$rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
 ?>
 </div><!-- #content -->
 <footer class="rk-footer">
@@ -18,7 +18,7 @@ $rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254797720290' );
 		<div class="rk-footer__cols">
 			<div>
 				<h3><?php bloginfo( 'name' ); ?></h3>
-				<p><?php esc_html_e( 'Your trusted supplier of power tools, solar, and hardware in Kenya. Genuine brands, fair prices, fast delivery countrywide.', 'toptech-machinery' ); ?></p>
+				<p><?php esc_html_e( 'Your trusted power-tools, solar and hardware shop on Tom Mboya Street, Nairobi. Genuine Total, Ingco, Makita, Bosch and Solarmax gear for pros and home projects, with countrywide delivery and M-PESA or pay-on-delivery.', 'toptech-machinery' ); ?></p>
 				<p><strong><?php esc_html_e( 'Address:', 'toptech-machinery' ); ?></strong><br><?php echo esc_html( $rk_address ); ?></p>
 				<p><a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $rk_phone ) ); ?>"><?php echo esc_html( $rk_phone ); ?></a> &middot; <a href="mailto:<?php echo esc_attr( $rk_email ); ?>"><?php echo esc_html( $rk_email ); ?></a></p>
 			</div>

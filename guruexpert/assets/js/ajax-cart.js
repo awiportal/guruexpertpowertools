@@ -1,4 +1,4 @@
-/* TopTech Machinery - AJAX add-to-cart with slide-in cart drawer, mini-cart fragments, live search. */
+/* Guru Expert Power Tools - AJAX add-to-cart with slide-in cart drawer, mini-cart fragments, live search. */
 (() => {
   'use strict';
   if (typeof ToptechAjax === 'undefined') return;

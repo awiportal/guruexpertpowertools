@@ -2,7 +2,7 @@
 /**
  * Auto-creates the legal / informational pages (fully editable) and builds
  * navigation menus when the theme is activated. All content uses the real
- * TopTech Machinery business details and is written to satisfy Google Merchant
+ * Guru Expert Power Tools business details and is written to satisfy Google Merchant
  * Center and standard e-commerce trust requirements.
  *
  * @package ToptechMachinery
@@ -54,7 +54,7 @@ final class Content_Installer {
 			$this->build_menus( $ids );
 			update_option( self::FLAG, time() );
 		} catch ( \Throwable $e ) {
-			error_log( 'TopTech Machinery content install failed: ' . $e->getMessage() );
+			error_log( 'Guru Expert Power Tools content install failed: ' . $e->getMessage() );
 		}
 	}
 
@@ -93,7 +93,7 @@ final class Content_Installer {
 			}
 			update_option( 'toptech_front_page_v1', time() );
 		} catch ( \Throwable $e ) {
-			error_log( 'TopTech Machinery front page setup failed: ' . $e->getMessage() );
+			error_log( 'Guru Expert Power Tools front page setup failed: ' . $e->getMessage() );
 		}
 	}
 
@@ -141,7 +141,7 @@ final class Content_Installer {
 			$this->build_menus( $ids );
 			update_option( self::MENU_FLAG, time() );
 		} catch ( \Throwable $e ) {
-			error_log( 'TopTech Machinery menu sync failed: ' . $e->getMessage() );
+			error_log( 'Guru Expert Power Tools menu sync failed: ' . $e->getMessage() );
 		}
 	}
 
@@ -253,19 +253,19 @@ final class Content_Installer {
 	 * @return array<string,array{title:string,content:string}>
 	 */
 	private function pages(): array {
-        $name  = 'TopTech Machinery';
-        $phone = '0797 720290';
-        $mail  = 'info@toptechmachinery.co.ke';
-        $addr  = 'This & That Exhibition, Opp. Ronald Ngala Post Office, Shop G15, Ronald Ngala Street, Nairobi, Kenya';
+        $name  = 'Guru Expert Power Tools';
+        $phone = '+254 708 777192';
+        $mail  = 'info@guruexpertpowertools.co.ke';
+        $addr  = 'Magomano House, 1st Floor, Room 10D, Tom Mboya Street, Nairobi';
 
         return array(
             'about-us' => array(
                 'title'   => 'About Us',
-                'content' => "<p>{$name} is a Nairobi-based supplier of power tools, solar equipment, generators, water pumps, welding machines and general hardware. We sell to contractors, fundis, farmers, businesses and homeowners, and we deliver across Kenya.</p><h2>What we sell</h2><p>We stock well-known brands such as Total, Ingco, Makita, DeWalt, Bosch, Honda and Solarmax, alongside dependable value options. Everything we carry comes from authorised distributors, so the item you buy is genuine and covered by the manufacturer's warranty.</p><h2>How we work</h2><p>Prices are shown clearly in Kenya Shillings, with nothing hidden. If you are not sure which tool or machine suits the job, call or WhatsApp us and we will help you decide. Orders placed before our afternoon cut-off in Nairobi are usually sent out the same day.</p><h2>Come and see us</h2><p>Visit the shop at {$addr}, open Monday to Saturday, 8:00am to 6:00pm. You can also reach us on {$phone} or at {$mail}.</p>",
+                'content' => "<p>{$name} is a Nairobi power-tools and hardware shop on Tom Mboya Street, supplying tools, solar equipment, generators, water pumps, welding machines and general hardware to contractors, fundis, farmers, businesses and homeowners - with delivery right across Kenya.</p><h2>What we sell</h2><p>We stock well-known brands such as Total, Ingco, Makita, DeWalt, Bosch, Honda and Solarmax, alongside dependable value options. Everything we carry comes from authorised distributors, so the item you buy is genuine and covered by the manufacturer's warranty.</p><h2>How we work</h2><p>Prices are shown clearly in Kenya Shillings, with nothing hidden. If you are not sure which tool or machine suits the job, call or WhatsApp us and we will help you decide. Orders placed before our afternoon cut-off in Nairobi are usually sent out the same day.</p><h2>Come and see us</h2><p>Visit the shop at {$addr}, open Monday to Saturday, 9:00am to 5:00pm. You can also reach us on {$phone} or at {$mail}.</p>",
             ),
             'contact-us' => array(
                 'title'   => 'Contact Us',
-                'content' => "<p>You can reach {$name} by phone, WhatsApp, email or in person at our Nairobi shop. We answer most calls and messages the same day during opening hours.</p><h2>Phone and WhatsApp</h2><p>Call or message us on {$phone}. WhatsApp is usually the quickest way to send a photo of what you need or to place an order.</p><h2>Email</h2><p>Write to us at {$mail}. Please include your order number if your message is about an order you have already placed.</p><h2>Our shop</h2><p>{$addr}</p><p>Open Monday to Saturday, 8:00am to 6:00pm. Closed on Sundays and public holidays.</p><h2>Send us a message</h2><p>The quickest way to reach us is a call or WhatsApp on {$phone}. You can also email us and we will reply within one working day.</p><p class=\"rk-contact-actions\"><a class=\"rk-btn rk-btn--primary\" href=\"tel:+254797720290\">Call {$phone}</a> <a class=\"rk-btn rk-btn--primary\" href=\"https://wa.me/254797720290\">WhatsApp us</a> <a class=\"rk-btn rk-btn--ghost\" href=\"mailto:{$mail}\">Email us</a></p>",
+                'content' => "<p>You can reach {$name} by phone, WhatsApp, email or in person at our Nairobi shop. We answer most calls and messages the same day during opening hours.</p><h2>Phone and WhatsApp</h2><p>Call or message us on {$phone}. WhatsApp is usually the quickest way to send a photo of what you need or to place an order.</p><h2>Email</h2><p>Write to us at {$mail}. Please include your order number if your message is about an order you have already placed.</p><h2>Our shop</h2><p>{$addr}</p><p>Open Monday to Saturday, 9:00am to 5:00pm. Closed on Sundays and public holidays.</p><h2>Send us a message</h2><p>The quickest way to reach us is a call or WhatsApp on {$phone}. You can also email us and we will reply within one working day.</p><p class=\"rk-contact-actions\"><a class=\"rk-btn rk-btn--primary\" href=\"tel:+254708777192\">Call {$phone}</a> <a class=\"rk-btn rk-btn--primary\" href=\"https://wa.me/254708777192\">WhatsApp us</a> <a class=\"rk-btn rk-btn--ghost\" href=\"mailto:{$mail}\">Email us</a></p>",
             ),
             'privacy-policy' => array(
                 'title'   => 'Privacy Policy',
@@ -297,7 +297,7 @@ final class Content_Installer {
             ),
             'faq' => array(
                 'title'   => 'Frequently Asked Questions',
-                'content' => "<h2>Ordering</h2><p><strong>How do I place an order?</strong><br>Add what you want to the cart and check out, or simply call or WhatsApp us on {$phone} and we will place it for you.</p><p><strong>Are your products genuine?</strong><br>Yes. We buy only from authorised distributors, and our products come with the manufacturer's warranty.</p><h2>Payment</h2><p><strong>How can I pay?</strong><br>By M-PESA, Visa or Mastercard, or cash on delivery where it is available. See the Payment Methods page for more.</p><h2>Delivery</h2><p><strong>Do you deliver countrywide?</strong><br>Yes. Nairobi orders often arrive the same or next day, and upcountry orders take a few days depending on your location. See the Shipping &amp; Delivery Policy.</p><p><strong>Can I collect my order myself?</strong><br>Yes, from our shop at {$addr} once we confirm it is ready.</p><h2>Returns and warranty</h2><p><strong>What if my item is faulty or wrong?</strong><br>Get in touch within 7 days and we will arrange a return, or help you with a warranty claim. See the Return &amp; Refund Policy and Warranty Policy.</p><h2>Talk to us</h2><p><strong>How do I reach you?</strong><br>Call or WhatsApp {$phone}, email {$mail}, or visit the shop Monday to Saturday, 8:00am to 6:00pm.</p>",
+                'content' => "<h2>Ordering</h2><p><strong>How do I place an order?</strong><br>Add what you want to the cart and check out, or simply call or WhatsApp us on {$phone} and we will place it for you.</p><p><strong>Are your products genuine?</strong><br>Yes. We buy only from authorised distributors, and our products come with the manufacturer's warranty.</p><h2>Payment</h2><p><strong>How can I pay?</strong><br>By M-PESA, Visa or Mastercard, or cash on delivery where it is available. See the Payment Methods page for more.</p><h2>Delivery</h2><p><strong>Do you deliver countrywide?</strong><br>Yes. Nairobi orders often arrive the same or next day, and upcountry orders take a few days depending on your location. See the Shipping &amp; Delivery Policy.</p><p><strong>Can I collect my order myself?</strong><br>Yes, from our shop at {$addr} once we confirm it is ready.</p><h2>Returns and warranty</h2><p><strong>What if my item is faulty or wrong?</strong><br>Get in touch within 7 days and we will arrange a return, or help you with a warranty claim. See the Return &amp; Refund Policy and Warranty Policy.</p><h2>Talk to us</h2><p><strong>How do I reach you?</strong><br>Call or WhatsApp {$phone}, email {$mail}, or visit the shop Monday to Saturday, 9:00am to 5:00pm.</p>",
             ),
             'track-order' => array(
                 'title'   => 'Track Order',
@@ -312,7 +312,7 @@ final class Content_Installer {
      * pages or clobbering later manual edits. Idempotent (own flag).
      */
     public function refresh_pages_content(): void {
-        if ( get_option( 'toptech_pages_content_v3' ) ) {
+        if ( get_option( 'toptech_pages_content_v4' ) ) {
             return;
         }
         if ( function_exists( 'current_user_can' ) === false || current_user_can( 'edit_theme_options' ) === false ) {
@@ -331,9 +331,9 @@ final class Content_Installer {
                     )
                 );
             }
-            update_option( 'toptech_pages_content_v3', time() );
+            update_option( 'toptech_pages_content_v4', time() );
         } catch ( \Throwable $e ) {
-            error_log( 'TopTech Machinery pages content refresh failed: ' . $e->getMessage() );
+            error_log( 'Guru Expert Power Tools pages content refresh failed: ' . $e->getMessage() );
         }
     }
 
@@ -396,7 +396,7 @@ final class Content_Installer {
 			}
 			update_option( self::CAT_IMG_FLAG, time() );
 		} catch ( \Throwable $e ) {
-			error_log( 'TopTech Machinery category image sync failed: ' . $e->getMessage() );
+			error_log( 'Guru Expert Power Tools category image sync failed: ' . $e->getMessage() );
 		}
 	}
 
@@ -439,9 +439,9 @@ final class Content_Installer {
 		}
 		try {
 			$mods = array(
-				'toptech_phone'    => array( '0719 261277', '0797 720290' ),
-				'toptech_whatsapp' => array( '254719261277', '254797720290' ),
-				'toptech_address'  => array( 'Royal Palms Mall, Shop No. BG 55, Nairobi, Kenya', 'This & That Exhibition, Opp. Ronald Ngala Post Office, Shop G15, Ronald Ngala Street, Nairobi, Kenya' ),
+				'toptech_phone'    => array( '0719 261277', '+254 708 777192' ),
+				'toptech_whatsapp' => array( '254719261277', '254708777192' ),
+				'toptech_address'  => array( 'Royal Palms Mall, Shop No. BG 55, Nairobi, Kenya', 'Magomano House, 1st Floor, Room 10D, Tom Mboya Street, Nairobi' ),
 			);
 			foreach ( $mods as $key => $pair ) {
 				if ( get_theme_mod( $key ) === $pair[0] ) {
@@ -449,10 +449,10 @@ final class Content_Installer {
 				}
 			}
 			$repl = array(
-				'Royal Palms Mall, Shop No. BG 55, Nairobi, Kenya' => 'This & That Exhibition, Opp. Ronald Ngala Post Office, Shop G15, Ronald Ngala Street, Nairobi, Kenya',
-				'Royal Palms Mall, Shop No. BG 55'                 => 'This & That Exhibition, Opp. Ronald Ngala Post Office, Shop G15, Ronald Ngala Street',
-				'0719 261277'                                      => '0797 720290',
-				'254719261277'                                     => '254797720290',
+				'Royal Palms Mall, Shop No. BG 55, Nairobi, Kenya' => 'Magomano House, 1st Floor, Room 10D, Tom Mboya Street, Nairobi',
+				'Royal Palms Mall, Shop No. BG 55'                 => 'Magomano House, 1st Floor, Room 10D, Tom Mboya Street',
+				'0719 261277'                                      => '+254 708 777192',
+				'254719261277'                                     => '254708777192',
 			);
 			$slugs = array(
 				'about-us', 'contact-us', 'payment-methods', 'return-refund-policy',
@@ -473,7 +473,7 @@ final class Content_Installer {
 			}
 			update_option( 'toptech_contact_refresh_v1', time() );
 		} catch ( \Throwable $e ) {
-			error_log( 'TopTech Machinery contact refresh failed: ' . $e->getMessage() );
+			error_log( 'Guru Expert Power Tools contact refresh failed: ' . $e->getMessage() );
 		}
 	}
 
@@ -491,11 +491,11 @@ final class Content_Installer {
 		}
 		try {
 			$defaults = array(
-				'toptech_phone'    => '0797 720290',
-				'toptech_email'    => 'info@toptechmachinery.co.ke',
-				'toptech_hours'    => 'Mon-Sat 8:00am - 6:00pm',
-				'toptech_address'  => 'This & That Exhibition, Opp. Ronald Ngala Post Office, Shop G15, Ronald Ngala Street, Nairobi, Kenya',
-				'toptech_whatsapp' => '254797720290',
+				'toptech_phone'    => '+254 708 777192',
+				'toptech_email'    => 'info@guruexpertpowertools.co.ke',
+				'toptech_hours'    => 'Mon - Sat, 9AM - 5PM',
+				'toptech_address'  => 'Magomano House, 1st Floor, Room 10D, Tom Mboya Street, Nairobi',
+				'toptech_whatsapp' => '254708777192',
 			);
 			foreach ( $defaults as $key => $val ) {
 				if ( trim( (string) get_theme_mod( $key, '' ) ) === '' ) {
@@ -504,7 +504,7 @@ final class Content_Installer {
 			}
 			update_option( 'toptech_contact_seed_v1', time() );
 		} catch ( \Throwable $e ) {
-			error_log( 'TopTech Machinery contact seed failed: ' . $e->getMessage() );
+			error_log( 'Guru Expert Power Tools contact seed failed: ' . $e->getMessage() );
 		}
 	}
 
@@ -530,8 +530,8 @@ final class Content_Installer {
 				return;
 			}
 			$clean = static function ( string $value ): string {
-				$value = str_ireplace( 'Ricky Power Tools', 'TopTech Machinery', $value );
-				$value = strtr( $value, array( 'from Ricky.' => 'from TopTech Machinery.' ) );
+				$value = str_ireplace( 'Ricky Power Tools', 'Guru Expert Power Tools', $value );
+				$value = strtr( $value, array( 'from Ricky.' => 'from Guru Expert Power Tools.' ) );
 				return $value;
 			};
 			$like = '%' . $wpdb->esc_like( 'Ricky' ) . '%';
@@ -583,7 +583,7 @@ final class Content_Installer {
 			}
 			update_option( 'toptech_brand_cleanup_v1', time() );
 		} catch ( \Throwable $e ) {
-			error_log( 'TopTech Machinery brand cleanup failed: ' . $e->getMessage() );
+			error_log( 'Guru Expert Power Tools brand cleanup failed: ' . $e->getMessage() );
 		}
 	}
 
@@ -666,7 +666,7 @@ final class Content_Installer {
 			}
 			update_option( 'toptech_brand_reclass_v1', time() );
 		} catch ( \Throwable $e ) {
-			error_log( 'TopTech Machinery brand reclassification failed: ' . $e->getMessage() );
+			error_log( 'Guru Expert Power Tools brand reclassification failed: ' . $e->getMessage() );
 		}
 	}
 }

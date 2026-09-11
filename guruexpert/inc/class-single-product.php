@@ -47,7 +47,7 @@ final class Single_Product {
 		if ( ! $product instanceof \WC_Product ) {
 			return;
 		}
-		$phone = esc_html( get_theme_mod( 'toptech_phone', '0797 720290' ) );
+		$phone = esc_html( get_theme_mod( 'toptech_phone', '+254 708 777192' ) );
 
 		echo '<div class="rk-pdp-extra">';
 
@@ -110,7 +110,7 @@ final class Single_Product {
 	 * FAQ tab content (delivery / payment / returns / warranty).
 	 */
 	public function faq_tab(): void {
-		$phone = esc_html( get_theme_mod( 'toptech_phone', '0797 720290' ) );
+		$phone = esc_html( get_theme_mod( 'toptech_phone', '+254 708 777192' ) );
 		$faqs  = array(
 			array( __( 'How soon can I get this delivered?', 'toptech-machinery' ), __( 'Nairobi orders are typically delivered same or next business day. Other towns take 1-3 business days. Confirm timing on checkout or by calling us.', 'toptech-machinery' ) ),
 			array( __( 'How do I pay?', 'toptech-machinery' ), __( 'We accept M-PESA, Visa, Mastercard and cash on delivery where available. All online payments are processed securely.', 'toptech-machinery' ) ),

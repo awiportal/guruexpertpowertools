@@ -1,7 +1,7 @@
-# TopTech Machinery - Premium WooCommerce Theme (v1.0.0)
+# Guru Expert Power Tools - Premium WooCommerce Theme (v1.0.0)
 
 A fast, secure, conversion-focused WooCommerce theme for power tools, solar, and hardware
-retail in Kenya. Brand colours: **Blue `#005EB8`** + **Dark Navy `#0B1E3F`**.
+retail in Kenya. Brand colours: **Green `#208050`** + **Deep Green `#0E2A1C`**.
 
 Built for **WordPress 6.5+**, **WooCommerce 9+**, **PHP 8.1+** (8.3 ready).
 
@@ -49,7 +49,7 @@ Built for **WordPress 6.5+**, **WooCommerce 9+**, **PHP 8.1+** (8.3 ready).
 3. On activation, all legal/info **Pages and menus are created automatically**. Edit any of them
    under **Pages** — the content is real, not placeholder.
 4. Upload your logo at **Appearance → Customize → Site Identity** (use the supplied `TOPTECH-LOGO.webp`).
-5. Set brand colours + contact details under **Customize → TopTech Machinery**.
+5. Set brand colours + contact details under **Customize → Guru Expert Power Tools**.
 6. Import your products (see `IMPORT-PRODUCTS.md`).
 7. Set **Settings → Reading → Homepage displays → A static page** and pick a page, or leave the
    default — `front-page.php` renders the homepage automatically.
@@ -66,8 +66,8 @@ folder separately and install it the same way, then activate the child.
 
 ## Support / brand details baked in
 
-- Phone / WhatsApp: **0797 720290**  ·  Email: **info@toptechmachinery.co.ke**
-- Address: **This & That Exhibition, Opp. Ronald Ngala Post Office, Shop G15, Ronald Ngala Street, Nairobi, Kenya**
+- Phone / WhatsApp: **+254 708 777192**  ·  Email: **info@guruexpertpowertools.co.ke**
+- Address: **Magomano House, 1st Floor, Room 10D, Tom Mboya Street, Nairobi**
 
 ## Roadmap (phases still to build)
 

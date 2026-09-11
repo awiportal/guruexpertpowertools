@@ -25,20 +25,20 @@ final class Customizer {
 	 * @param \WP_Customize_Manager $wp_customize Customizer manager.
 	 */
 	public function register( $wp_customize ): void {
-		$wp_customize->add_panel( 'toptech_panel', array( 'title' => __( 'TopTech Machinery', 'toptech-machinery' ), 'priority' => 20 ) );
+		$wp_customize->add_panel( 'toptech_panel', array( 'title' => __( 'Guru Expert Power Tools', 'toptech-machinery' ), 'priority' => 20 ) );
 
 		// Colours.
 		$wp_customize->add_section( 'toptech_colors', array( 'title' => __( 'Brand Colours', 'toptech-machinery' ), 'panel' => 'toptech_panel' ) );
-		$this->color( $wp_customize, 'toptech_primary', '#005EB8', __( 'Primary (Blue)', 'toptech-machinery' ) );
-		$this->color( $wp_customize, 'toptech_navy', '#0B1E3F', __( 'Secondary (Dark Blue)', 'toptech-machinery' ) );
+		$this->color( $wp_customize, 'toptech_primary', '#208050', __( 'Primary (Green)', 'toptech-machinery' ) );
+		$this->color( $wp_customize, 'toptech_navy', '#0E2A1C', __( 'Secondary (Dark Green)', 'toptech-machinery' ) );
 
 		// Contact + support.
 		$wp_customize->add_section( 'toptech_contact', array( 'title' => __( 'Contact & Support', 'toptech-machinery' ), 'panel' => 'toptech_panel' ) );
-		$this->text( $wp_customize, 'toptech_phone', '0797 720290', __( 'Phone / WhatsApp', 'toptech-machinery' ) );
-		$this->text( $wp_customize, 'toptech_email', 'info@toptechmachinery.co.ke', __( 'Email', 'toptech-machinery' ) );
-		$this->text( $wp_customize, 'toptech_hours', 'Mon-Sat 8:00am - 6:00pm', __( 'Support Hours', 'toptech-machinery' ) );
-		$this->text( $wp_customize, 'toptech_address', 'This & That Exhibition, Opp. Ronald Ngala Post Office, Shop G15, Ronald Ngala Street, Nairobi, Kenya', __( 'Business Address', 'toptech-machinery' ) );
-		$this->text( $wp_customize, 'toptech_whatsapp', '254797720290', __( 'WhatsApp number (intl, no +)', 'toptech-machinery' ) );
+		$this->text( $wp_customize, 'toptech_phone', '+254 708 777192', __( 'Phone / WhatsApp', 'toptech-machinery' ) );
+		$this->text( $wp_customize, 'toptech_email', 'info@guruexpertpowertools.co.ke', __( 'Email', 'toptech-machinery' ) );
+		$this->text( $wp_customize, 'toptech_hours', 'Mon - Sat, 9AM - 5PM', __( 'Support Hours', 'toptech-machinery' ) );
+		$this->text( $wp_customize, 'toptech_address', 'Magomano House, 1st Floor, Room 10D, Tom Mboya Street, Nairobi', __( 'Business Address', 'toptech-machinery' ) );
+		$this->text( $wp_customize, 'toptech_whatsapp', '254708777192', __( 'WhatsApp number (intl, no +)', 'toptech-machinery' ) );
 	}
 
 	private function color( $wp, string $id, string $default, string $label ): void {
@@ -55,8 +55,8 @@ final class Customizer {
 	 * Print brand colours as CSS custom properties.
 	 */
 	public function output_css_vars(): void {
-		$yellow = sanitize_hex_color( (string) get_theme_mod( 'toptech_primary', '#005EB8' ) );
-		$navy   = sanitize_hex_color( (string) get_theme_mod( 'toptech_navy', '#0B1E3F' ) );
+		$yellow = sanitize_hex_color( (string) get_theme_mod( 'toptech_primary', '#208050' ) );
+		$navy   = sanitize_hex_color( (string) get_theme_mod( 'toptech_navy', '#0E2A1C' ) );
 		printf(
 			'<style id="toptech-brand">:root{--rk-primary:%s;--rk-navy:%s}</style>' . "\n",
 			esc_html( $yellow ),
