@@ -1,61 +1,48 @@
 <?php
 /**
- * Hero: vertical category menu + slider.
+ * Homepage hero: headline, CTAs, featured image + quick category chips.
  *
  * @package ToptechMachinery
  */
 
 defined( 'ABSPATH' ) || exit;
-?>
-<section class="rk-hero">
-	<div class="container">
-		<aside class="rk-vertcat" aria-label="<?php esc_attr_e( 'Shop by category', 'toptech-machinery' ); ?>">
-			<h2><?php esc_html_e( 'All Categories', 'toptech-machinery' ); ?></h2>
-			<?php
-			if ( has_nav_menu( 'vertical_cats' ) ) {
-				wp_nav_menu( array( 'theme_location' => 'vertical_cats', 'container' => false, 'fallback_cb' => false, 'depth' => 1 ) );
-			} else {
-				$terms = function_exists( 'rk_cached_terms' ) ? rk_cached_terms( 'product_cat', 0 ) : array();
-				if ( $terms ) {
-					echo '<ul>';
-					foreach ( $terms as $t ) {
-						printf( '<li><a href="%s">%s <span>%d</span></a></li>', esc_url( get_term_link( $t ) ), esc_html( $t->name ), (int) $t->count );
-					}
-					echo '</ul>';
-				}
-			}
-			?>
-		</aside>
 
-		<div class="rk-slider" tabindex="0" aria-roledescription="carousel" aria-label="<?php esc_attr_e( 'Promotions', 'toptech-machinery' ); ?>">
-			<?php
-			$slides  = get_theme_mod( 'toptech_slides', array() );
-			$rk_shop = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
-			if ( empty( $slides ) || ! is_array( $slides ) ) {
-				$slides = array(
-					array( 'img' => TOPTECH_URI . 'assets/img/banner-tools.jpg', 'title' => __( 'Power Tools That Earn Their Keep', 'toptech-machinery' ), 'text' => __( 'Genuine Total, Ingco, Makita and Bosch tools at honest Nairobi prices, delivered countrywide.', 'toptech-machinery' ), 'url' => $rk_shop ),
-					array( 'img' => TOPTECH_URI . 'assets/img/banner-solar.jpg', 'title' => __( 'Solar & Backup Power, Sorted', 'toptech-machinery' ), 'text' => __( 'Panels, inverters, batteries and street lights in stock and ready to install.', 'toptech-machinery' ), 'url' => $rk_shop ),
-				);
-			}
-			foreach ( $slides as $i => $s ) {
-				$img_attr = 0 === $i
-					? 'width="1200" height="500" fetchpriority="high" decoding="async" loading="eager"'
-					: 'width="1200" height="500" loading="lazy" decoding="async"';
-				printf(
-					'<div class="rk-slide%1$s"><img src="%2$s" alt="%3$s" %4$s><div class="rk-slide__promo"><h2>%3$s</h2><p>%5$s</p><a class="rk-btn rk-btn--primary" href="%6$s">%7$s</a></div></div>',
-					0 === $i ? ' is-active' : '',
-					esc_url( $s['img'] ),
-					esc_attr( $s['title'] ),
-					$img_attr, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static attribute string.
-					esc_html( $s['text'] ),
-					esc_url( $s['url'] ),
-					esc_html__( 'Shop Now', 'toptech-machinery' )
-				);
-			}
-			?>
-			<button class="rk-slider__arrow rk-slider__arrow--prev" aria-label="<?php esc_attr_e( 'Previous slide', 'toptech-machinery' ); ?>">&#8249;</button>
-			<button class="rk-slider__arrow rk-slider__arrow--next" aria-label="<?php esc_attr_e( 'Next slide', 'toptech-machinery' ); ?>">&#8250;</button>
-			<div class="rk-slider__dots"></div>
+$gx_shop = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
+$gx_wa   = function_exists( 'rk_whatsapp_number' ) ? rk_whatsapp_number() : '254708777192';
+$gx_cats = function_exists( 'rk_cached_terms' ) ? rk_cached_terms( 'product_cat', 8 ) : array();
+?>
+<section class="gx-hero">
+	<div class="container gx-hero__grid">
+		<div class="gx-hero__content">
+			<span class="gx-eyebrow"><?php esc_html_e( 'Power tools . Solar . Hardware', 'toptech-machinery' ); ?></span>
+			<h1 class="gx-hero__title"><?php esc_html_e( 'Genuine tools & solar power,', 'toptech-machinery' ); ?> <span><?php esc_html_e( 'priced for Kenya', 'toptech-machinery' ); ?></span></h1>
+			<p class="gx-hero__lead"><?php esc_html_e( 'Shop Total, Ingco, Makita, Bosch, Solarmax and more - authorised stock, honest prices, and quick delivery from our Tom Mboya Street shop to anywhere in the country.', 'toptech-machinery' ); ?></p>
+			<div class="gx-hero__cta">
+				<a class="gx-btn gx-btn--solid" href="<?php echo esc_url( $gx_shop ); ?>"><?php esc_html_e( 'Shop all products', 'toptech-machinery' ); ?></a>
+				<?php if ( $gx_wa ) : ?>
+				<a class="gx-btn gx-btn--wa" href="https://wa.me/<?php echo esc_attr( $gx_wa ); ?>" target="_blank" rel="noopener nofollow">
+					<svg viewBox="0 0 32 32" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4C24.6 28.8 30 23.4 30 16.8 30 9.4 24.6 3 16 3zm0 23.6c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.3-.4C5.5 19 5 17 5 15c0-5.5 4.5-10 11-10s11 4.5 11 10-4.5 11.6-11 11.6z"/></svg>
+					<?php esc_html_e( 'Order on WhatsApp', 'toptech-machinery' ); ?>
+				</a>
+				<?php endif; ?>
+			</div>
+			<ul class="gx-hero__points">
+				<li><?php esc_html_e( 'Pay by M-PESA or on delivery', 'toptech-machinery' ); ?></li>
+				<li><?php esc_html_e( 'Genuine brands + warranty', 'toptech-machinery' ); ?></li>
+				<li><?php esc_html_e( 'Countrywide delivery in 1-5 days', 'toptech-machinery' ); ?></li>
+			</ul>
+		</div>
+		<div class="gx-hero__media">
+			<img src="<?php echo esc_url( TOPTECH_URI . 'assets/img/banner-tools.jpg' ); ?>" width="720" height="540" alt="<?php esc_attr_e( 'Power tools and equipment', 'toptech-machinery' ); ?>" fetchpriority="high" decoding="async">
+			<div class="gx-hero__badge"><strong>15+</strong><span><?php esc_html_e( 'trusted brands in stock', 'toptech-machinery' ); ?></span></div>
 		</div>
 	</div>
+	<?php if ( ! empty( $gx_cats ) && ! is_wp_error( $gx_cats ) ) : ?>
+	<div class="container gx-quickcats">
+		<span class="gx-quickcats__label"><?php esc_html_e( 'Popular:', 'toptech-machinery' ); ?></span>
+		<?php foreach ( $gx_cats as $gx_c ) : ?>
+			<a href="<?php echo esc_url( get_term_link( $gx_c ) ); ?>"><?php echo esc_html( $gx_c->name ); ?></a>
+		<?php endforeach; ?>
+	</div>
+	<?php endif; ?>
 </section>
