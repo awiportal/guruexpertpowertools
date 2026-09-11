@@ -23,7 +23,7 @@
 .gx-hero{position:relative;overflow:hidden;color:#fff;
   background:radial-gradient(1100px 480px at 88% -12%,rgba(32,208,96,.22),transparent 60%),
              linear-gradient(155deg,#0E2A1C 0%,#124a2d 55%,#1c7a4a 130%)}
-.gx-hero__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding:58px 0 30px}
+.gx-hero__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding-top:58px;padding-bottom:30px}
 .gx-eyebrow{display:inline-block;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:800;
   color:#8ff0b6;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:6px 13px;border-radius:999px;margin-bottom:18px}
 .gx-hero__title{font-family:"Oswald",Inter,system-ui,sans-serif;font-size:clamp(2.1rem,4.7vw,3.5rem);line-height:1.04;
@@ -112,7 +112,7 @@
 
 /* ---------- Closing CTA band ---------- */
 .gx-cta{background:linear-gradient(120deg,#0E2A1C,#208050);color:#fff}
-.gx-cta__inner{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:38px 0;flex-wrap:wrap}
+.gx-cta__inner{display:flex;align-items:center;justify-content:space-between;gap:26px;padding-top:38px;padding-bottom:38px;flex-wrap:wrap}
 .gx-cta h2{font-family:"Oswald",Inter,system-ui,sans-serif;font-size:clamp(1.4rem,2.5vw,2rem);text-transform:uppercase;letter-spacing:.01em;margin:0 0 6px;color:#fff}
 .gx-cta p{margin:0;color:#dbe9e0}
 .gx-cta__btns{display:flex;gap:12px;flex-wrap:wrap}
