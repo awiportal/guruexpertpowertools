@@ -1,4 +1,4 @@
-# TopTech Machinery - Setup Flow (ThemeForest-style)
+# Guru Expert Power Tools - Setup Flow (ThemeForest-style)
 
 This theme now installs like a premium ThemeForest theme:
 **Activate -> install required plugins -> import demo data -> import your full products.**
@@ -19,7 +19,7 @@ Recommended: Rank Math SEO, LiteSpeed Cache, WP Mail SMTP, Variation Swatches,
 Google Listings & Ads, PDF Invoices, Wishlist, Compare.
 
 ## Step 3 - Import demo data (one click)
-Go to **Appearance -> Import Demo Data** -> click **Import** on "TopTech Machinery - Full Demo".
+Go to **Appearance -> Import Demo Data** -> click **Import** on "Guru Expert Power Tools - Full Demo".
 This creates:
 - All product **categories** (37) and **brands** (81)
 - **42 sample products** with images, prices and SKUs (6 per top category)
@@ -38,8 +38,8 @@ with the same SKU are updated, not duplicated.
 
 ## Step 5 - Brand it
 - Upload your logo: Appearance -> Customize -> Site Identity (use `assets/img/logo.webp`).
-- Colours + contact details: Customize -> TopTech Machinery (yellow #005EB8 / navy #0B1E3F,
-  phone 0797 720290, WhatsApp, email info@toptechmachinery.co.ke, Nairobi address).
+- Colours + contact details: Customize -> Guru Expert Power Tools (green #208050 / deep green #0E2A1C,
+  phone +254 708 777192, WhatsApp, email info@guruexpertpowertools.co.ke, Nairobi address).
 - Set the homepage: Settings -> Reading -> "Your homepage displays" is handled automatically,
   but you can point it at the "Home" page if you prefer.
 

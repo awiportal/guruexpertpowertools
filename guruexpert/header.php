@@ -7,10 +7,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$rk_phone    = get_theme_mod( 'toptech_phone', '0797 720290' );
-$rk_email    = get_theme_mod( 'toptech_email', 'info@toptechmachinery.co.ke' );
-$rk_hours    = get_theme_mod( 'toptech_hours', 'Mon-Sat 8:00am - 6:00pm' );
-$rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254797720290' );
+$rk_phone    = get_theme_mod( 'toptech_phone', '+254 708 777192' );
+$rk_email    = get_theme_mod( 'toptech_email', 'info@guruexpertpowertools.co.ke' );
+$rk_hours    = get_theme_mod( 'toptech_hours', 'Mon - Sat, 9AM - 5PM' );
+$rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>

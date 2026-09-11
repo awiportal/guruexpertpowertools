@@ -164,7 +164,7 @@ final class Merchant_Inspector {
 			__( 'Contact details visible (phone/email)', 'toptech-machinery' ),
 			$contact ? 'pass' : 'warning',
 			$contact ? __( 'Contact phone/email are set and shown in the header/footer.', 'toptech-machinery' ) : __( 'No contact phone or email configured.', 'toptech-machinery' ),
-			__( 'Appearance > Customize > set the TopTech Machinery phone and email so shoppers can reach a real business.', 'toptech-machinery' ),
+			__( 'Appearance > Customize > set the Guru Expert Power Tools phone and email so shoppers can reach a real business.', 'toptech-machinery' ),
 			admin_url( 'customize.php' ),
 			__( 'Open Customizer', 'toptech-machinery' )
 		);

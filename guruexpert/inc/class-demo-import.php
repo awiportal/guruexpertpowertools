@@ -39,7 +39,7 @@ final class Demo_Import {
 	public function import_files(): array {
 		return array(
 			array(
-				'import_file_name'       => __( 'TopTech Machinery - Full Demo', 'toptech-machinery' ),
+				'import_file_name'       => __( 'Guru Expert Power Tools - Full Demo', 'toptech-machinery' ),
 				'local_import_file'      => TOPTECH_DIR . 'demo/content.xml',
 				'import_preview_image_url' => TOPTECH_URI . 'assets/img/logo.webp',
 				'import_notice'          => __( 'Installs demo pages, menus, product categories, brands and sample products. After importing, use Products > Import to load your full product CSV.', 'toptech-machinery' ),
@@ -56,7 +56,7 @@ final class Demo_Import {
 	 */
 	public function page_setup( array $default ): array {
 		$default['parent_slug'] = 'themes.php';
-		$default['page_title']  = __( 'TopTech Machinery Demo Import', 'toptech-machinery' );
+		$default['page_title']  = __( 'Guru Expert Power Tools Demo Import', 'toptech-machinery' );
 		$default['menu_title']  = __( 'Import Demo Data', 'toptech-machinery' );
 		$default['capability']  = 'import';
 		$default['menu_slug']   = 'toptech-demo-import';

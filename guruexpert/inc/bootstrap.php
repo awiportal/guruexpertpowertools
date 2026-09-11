@@ -31,7 +31,7 @@ foreach ( $toptech_modules as $toptech_class ) {
 			( new $toptech_class() )->hooks();
 		}
 	} catch ( \Throwable $e ) {
-		error_log( 'TopTech Machinery module ' . $toptech_class . ' failed: ' . $e->getMessage() );
+		error_log( 'Guru Expert Power Tools module ' . $toptech_class . ' failed: ' . $e->getMessage() );
 	}
 }
 

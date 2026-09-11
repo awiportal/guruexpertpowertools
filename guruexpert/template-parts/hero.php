@@ -33,8 +33,8 @@ defined( 'ABSPATH' ) || exit;
 			$rk_shop = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
 			if ( empty( $slides ) || ! is_array( $slides ) ) {
 				$slides = array(
-					array( 'img' => TOPTECH_URI . 'assets/img/banner-tools.jpg', 'title' => __( 'Power Tools & Hardware', 'toptech-machinery' ), 'text' => __( 'Genuine brands. Fair prices. Fast countrywide delivery.', 'toptech-machinery' ), 'url' => $rk_shop ),
-					array( 'img' => TOPTECH_URI . 'assets/img/banner-solar.jpg', 'title' => __( 'Solar Solutions', 'toptech-machinery' ), 'text' => __( 'Panels, inverters, batteries & street lights in stock.', 'toptech-machinery' ), 'url' => $rk_shop ),
+					array( 'img' => TOPTECH_URI . 'assets/img/banner-tools.jpg', 'title' => __( 'Power Tools That Earn Their Keep', 'toptech-machinery' ), 'text' => __( 'Genuine Total, Ingco, Makita and Bosch tools at honest Nairobi prices, delivered countrywide.', 'toptech-machinery' ), 'url' => $rk_shop ),
+					array( 'img' => TOPTECH_URI . 'assets/img/banner-solar.jpg', 'title' => __( 'Solar & Backup Power, Sorted', 'toptech-machinery' ), 'text' => __( 'Panels, inverters, batteries and street lights in stock and ready to install.', 'toptech-machinery' ), 'url' => $rk_shop ),
 				);
 			}
 			foreach ( $slides as $i => $s ) {

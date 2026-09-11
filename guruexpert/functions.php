@@ -1,6 +1,6 @@
 <?php
 /**
- * TopTech Machinery theme bootstrap.
+ * Guru Expert Power Tools theme bootstrap.
  *
  * @package ToptechMachinery
  */
@@ -41,13 +41,13 @@ spl_autoload_register(
 try {
 	require TOPTECH_DIR . 'inc/bootstrap.php';
 } catch ( \Throwable $e ) {
-	error_log( 'TopTech Machinery bootstrap error: ' . $e->getMessage() . ' @ ' . $e->getFile() . ':' . $e->getLine() );
+	error_log( 'Guru Expert Power Tools bootstrap error: ' . $e->getMessage() . ' @ ' . $e->getFile() . ':' . $e->getLine() );
 	if ( is_admin() ) {
 		add_action(
 			'admin_notices',
 			static function () use ( $e ) {
 				printf(
-					'<div class="notice notice-error"><p><strong>TopTech Machinery:</strong> %s</p></div>',
+					'<div class="notice notice-error"><p><strong>Guru Expert Power Tools:</strong> %s</p></div>',
 					esc_html( $e->getMessage() )
 				);
 			}
