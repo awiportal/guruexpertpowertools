@@ -1,0 +1,140 @@
+/* ============================================================
+   Guru Expert Power Tools - Homepage design layer (v2)
+   Loaded only on the front page (after theme + industrial).
+   All rules are scoped to .gx-home so nothing else is affected.
+   ============================================================ */
+
+.gx-home{--gx-green:#208050;--gx-green-d:#17663F;--gx-ink:#0E2A1C;--gx-line:#e6efe9;--gx-soft:#eef4f0}
+.gx-home img{display:block}
+
+/* ---------- Buttons ---------- */
+.gx-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-weight:800;font-size:.95rem;
+  padding:.85rem 1.5rem;border-radius:10px;text-decoration:none;letter-spacing:.01em;border:0;cursor:pointer;
+  transition:transform .12s ease,box-shadow .15s ease,background .15s ease,color .15s ease}
+.gx-btn:active{transform:translateY(1px)}
+.gx-btn--solid{background:#fff;color:#0E2A1C}
+.gx-btn--solid:hover{background:#eafff2;color:#0E2A1C;box-shadow:0 12px 28px rgba(0,0,0,.22)}
+.gx-btn--wa{background:#25D366;color:#fff}
+.gx-btn--wa:hover{background:#1db354;color:#fff}
+.gx-btn--outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.65)}
+.gx-btn--outline:hover{background:#fff;color:#0E2A1C}
+
+/* ---------- Hero ---------- */
+.gx-hero{position:relative;overflow:hidden;color:#fff;
+  background:radial-gradient(1100px 480px at 88% -12%,rgba(32,208,96,.22),transparent 60%),
+             linear-gradient(155deg,#0E2A1C 0%,#124a2d 55%,#1c7a4a 130%)}
+.gx-hero__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding:58px 0 30px}
+.gx-eyebrow{display:inline-block;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:800;
+  color:#8ff0b6;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:6px 13px;border-radius:999px;margin-bottom:18px}
+.gx-hero__title{font-family:"Oswald",Inter,system-ui,sans-serif;font-size:clamp(2.1rem,4.7vw,3.5rem);line-height:1.04;
+  margin:0 0 16px;color:#fff;font-weight:700;letter-spacing:.005em;text-transform:uppercase}
+.gx-hero__title span{color:#5FD08E}
+.gx-hero__lead{font-size:clamp(1rem,1.35vw,1.16rem);line-height:1.6;color:#d8e8de;max-width:46ch;margin:0 0 26px}
+.gx-hero__cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.gx-hero__points{list-style:none;margin:0;padding:0;display:flex;gap:22px;flex-wrap:wrap}
+.gx-hero__points li{position:relative;padding-left:26px;font-size:.9rem;color:#eaf5ee;font-weight:600}
+.gx-hero__points li::before{content:"";position:absolute;left:0;top:1px;width:18px;height:18px;border-radius:50%;
+  background:#20D060;box-shadow:0 0 0 3px rgba(32,208,96,.22)}
+.gx-hero__points li::after{content:"";position:absolute;left:6px;top:6px;width:6px;height:3px;
+  border-left:2px solid #0E2A1C;border-bottom:2px solid #0E2A1C;transform:rotate(-45deg)}
+.gx-hero__media{position:relative}
+.gx-hero__media img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);box-shadow:0 26px 64px rgba(0,0,0,.38)}
+.gx-hero__badge{position:absolute;left:-14px;bottom:-16px;background:#fff;color:#0E2A1C;border-radius:14px;
+  padding:12px 16px;box-shadow:0 16px 36px rgba(0,0,0,.28);display:flex;flex-direction:column;line-height:1.05}
+.gx-hero__badge strong{font-size:1.7rem;color:#208050}
+.gx-hero__badge span{font-size:.72rem;font-weight:700;color:#5b6472;max-width:12ch}
+.gx-quickcats{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding-bottom:26px}
+.gx-quickcats__label{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#9be3b6}
+.gx-quickcats a{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);color:#fff;
+  padding:8px 14px;border-radius:999px;font-size:.83rem;font-weight:700;text-decoration:none;transition:.15s}
+.gx-quickcats a:hover{background:#fff;color:#0E2A1C}
+
+/* ---------- Section shell + heading ---------- */
+.gx-section{padding:46px 0}
+.gx-section--tint{background:var(--gx-soft)}
+.gx-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
+.gx-head--center{justify-content:center;text-align:center;margin-bottom:22px}
+.gx-head__eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.72rem;font-weight:800;color:#208050;margin:0 0 6px}
+.gx-head h2{font-family:"Oswald",Inter,system-ui,sans-serif;font-size:clamp(1.55rem,2.7vw,2.1rem);margin:0;
+  color:#0E2A1C;font-weight:700;text-transform:uppercase;letter-spacing:.01em}
+.gx-head a{color:#17663F;font-weight:800;font-size:.9rem;text-decoration:none;white-space:nowrap}
+.gx-head a:hover{color:#208050}
+
+/* ---------- Benefits ---------- */
+.gx-benefits{background:#fff;padding:34px 0;border-bottom:1px solid var(--gx-line)}
+.gx-benefits__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.gx-benefit{display:flex;gap:14px;align-items:flex-start;background:#f6faf7;border:1px solid var(--gx-line);border-radius:14px;padding:18px}
+.gx-benefit__icon{flex:none;width:46px;height:46px;border-radius:12px;background:#e2f4ea;color:#208050;display:flex;align-items:center;justify-content:center}
+.gx-benefit__icon svg{width:24px;height:24px}
+.gx-benefit__text strong{display:block;font-size:.98rem;color:#0E2A1C;margin-bottom:3px}
+.gx-benefit__text span{font-size:.84rem;color:#5b6472;line-height:1.4}
+
+/* ---------- Category mosaic ---------- */
+.gx-catmosaic{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.gx-cat{position:relative;display:block;border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:#0E2A1C;
+  text-decoration:none;box-shadow:0 8px 22px rgba(14,42,28,.10)}
+.gx-cat__img,.gx-cat__img img{display:block;width:100%;height:100%;object-fit:cover}
+.gx-cat__img img{transition:transform .45s ease}
+.gx-cat:hover .gx-cat__img img{transform:scale(1.07)}
+.gx-cat__overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;
+  background:linear-gradient(180deg,rgba(14,42,28,0) 34%,rgba(14,42,28,.86) 100%)}
+.gx-cat__name{color:#fff;font-weight:800;font-size:1.02rem;line-height:1.2}
+.gx-cat__count{color:#9be3b6;font-size:.8rem;font-weight:700;margin-top:3px}
+.gx-cat__go{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);
+  color:#208050;display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:800;
+  transform:translateY(-6px);opacity:0;transition:.2s}
+.gx-cat:hover .gx-cat__go{transform:none;opacity:1}
+
+/* ---------- Promo split ---------- */
+.gx-promos{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.gx-promo{position:relative;border-radius:18px;overflow:hidden;min-height:230px;display:flex;flex-direction:column;
+  justify-content:center;padding:30px 34px;color:#fff;background-size:cover;background-position:center}
+.gx-promo--pro{background:linear-gradient(125deg,#208050,#12613a)}
+.gx-promo h3{font-family:"Oswald",Inter,system-ui,sans-serif;font-size:1.55rem;text-transform:uppercase;letter-spacing:.01em;margin:0 0 8px;color:#fff}
+.gx-promo p{margin:0 0 18px;color:#e7f3ec;max-width:36ch;line-height:1.5}
+.gx-promo .gx-btn{align-self:flex-start}
+
+/* ---------- Brands ---------- */
+.gx-brands{background:#fff}
+.gx-brandrow{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.gx-brandrow span{font-family:"Oswald",Inter,system-ui,sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:#0E2A1C;background:#f2f7f4;border:1px solid var(--gx-line);padding:12px 22px;border-radius:10px;font-size:1.02rem}
+
+/* ---------- Product rows (reuse WooCommerce loop, restyled headers) ---------- */
+.gx-home__rows{background:#fff}
+.gx-home__rows .rk-section--products{padding:34px 0;border-top:1px solid #eef2ef}
+.gx-home__rows .rk-section--products:first-child{border-top:0}
+.gx-home__rows .rk-section__head h2{font-family:"Oswald",Inter,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.01em;
+  font-size:clamp(1.4rem,2.4vw,1.9rem);padding-left:16px}
+.gx-home__rows .rk-section__head h2::before{width:6px;border-radius:3px;background:var(--gx-green)}
+.gx-home__rows .rk-viewmore{color:#17663F;font-weight:800}
+
+/* ---------- Closing CTA band ---------- */
+.gx-cta{background:linear-gradient(120deg,#0E2A1C,#208050);color:#fff}
+.gx-cta__inner{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:38px 0;flex-wrap:wrap}
+.gx-cta h2{font-family:"Oswald",Inter,system-ui,sans-serif;font-size:clamp(1.4rem,2.5vw,2rem);text-transform:uppercase;letter-spacing:.01em;margin:0 0 6px;color:#fff}
+.gx-cta p{margin:0;color:#dbe9e0}
+.gx-cta__btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1024px){
+  .gx-hero__grid{grid-template-columns:1fr;gap:26px;padding-top:38px}
+  .gx-hero__media{order:-1;max-width:560px}
+  .gx-benefits__grid{grid-template-columns:repeat(2,1fr)}
+  .gx-catmosaic{grid-template-columns:repeat(3,1fr)}
+  .gx-promos{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .gx-section{padding:34px 0}
+  .gx-hero__grid{padding-top:30px}
+  .gx-hero__points{gap:12px 20px}
+  .gx-benefits__grid{grid-template-columns:1fr}
+  .gx-catmosaic{grid-template-columns:repeat(2,1fr);gap:12px}
+  .gx-head{flex-direction:column;align-items:flex-start}
+  .gx-cta__inner{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  .gx-cat__img img,.gx-btn{transition:none}
+  .gx-cat:hover .gx-cat__img img{transform:none}
+}

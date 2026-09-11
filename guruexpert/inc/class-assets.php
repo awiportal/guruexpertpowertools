@@ -32,6 +32,11 @@ final class Assets {
 		wp_enqueue_style( 'toptech-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap', array(), null );
 		wp_enqueue_style( 'toptech-industrial', TOPTECH_URI . 'assets/css/theme-industrial.css', array( 'toptech-theme' ), TOPTECH_VERSION );
 
+		// Homepage-only design layer.
+		if ( is_front_page() ) {
+			wp_enqueue_style( 'toptech-home', TOPTECH_URI . 'assets/css/home.css', array( 'toptech-industrial' ), TOPTECH_VERSION );
+		}
+
 		wp_enqueue_script( 'toptech-theme', TOPTECH_URI . 'assets/js/theme.js', array(), TOPTECH_VERSION, true );
 
 		if ( class_exists( 'WooCommerce' ) ) {
