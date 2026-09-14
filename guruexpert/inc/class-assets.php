@@ -67,6 +67,11 @@ final class Assets {
 	 * Inline minimal critical CSS for fast FCP. Uses system fonts (no webfont download).
 	 */
 	public function preload_and_critical(): void {
+		echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+		if ( is_front_page() ) {
+			printf( '<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n", esc_url( GURUEXPERTPOWERTOOLS_URI . 'assets/img/slides/slide-power-tools.jpg' ) );
+		}
 		echo '<style id="guruexpertpowertools-critical">:root{--rk-primary:#208050;--rk-navy:#0E2A1C}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1a1f2e;background:#fff}.rk-header{background:var(--rk-navy)}img{max-width:100%;height:auto}</style>' . "\n";
 	}
 

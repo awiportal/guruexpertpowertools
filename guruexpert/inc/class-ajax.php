@@ -30,6 +30,10 @@ final class Ajax {
 	 * Add a product to the cart without a page reload.
 	 */
 	public function add_to_cart(): void {
+		if ( false === $this->within_rate_limit( 'atc', 30, MINUTE_IN_SECONDS ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Too many requests. Please slow down.', 'guruexpertpowertools' ) ), 429 );
+		}
+
 		// Public endpoint (own cart-session / read-only search); kept nonce-free so it keeps working on fully cached pages.
 
 		if ( ! function_exists( 'WC' ) || null === WC()->cart ) {
@@ -55,6 +59,10 @@ final class Ajax {
 	 * Autocomplete search across products, categories, brands, and SKU.
 	 */
 	public function live_search(): void {
+		if ( false === $this->within_rate_limit( 'search', 45, MINUTE_IN_SECONDS ) ) {
+			wp_send_json_success( array( 'products' => array(), 'terms' => array() ) );
+		}
+
 		// Public endpoint (own cart-session / read-only search); kept nonce-free so it keeps working on fully cached pages.
 
 		$term = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
@@ -146,5 +154,25 @@ final class Ajax {
 		}
 		$like = '%' . $wpdb->esc_like( $term ) . '%';
 		return $wpdb->prepare( " AND {$wpdb->posts}.post_title LIKE %s ", $like );
+	}
+
+	/**
+	 * Lightweight per-IP throttle for the public (nopriv) AJAX endpoints.
+	 *
+	 * @param string $bucket Endpoint identifier.
+	 * @param int    $limit  Maximum requests allowed per window.
+	 * @param int    $window Window length in seconds.
+	 * @return bool True when the request is within the allowed rate.
+	 */
+	private function within_rate_limit( string $bucket, int $limit, int $window ): bool {
+		$ip   = isset( $_SERVER['REMOTE_ADDR'] ) ? (string) wp_unslash( $_SERVER['REMOTE_ADDR'] ) : '';
+		$ip   = filter_var( $ip, FILTER_VALIDATE_IP ) ? $ip : 'unknown';
+		$key  = 'gxpt_rl_' . $bucket . '_' . md5( $ip );
+		$hits = (int) get_transient( $key );
+		if ( $hits >= $limit ) {
+			return false;
+		}
+		set_transient( $key, $hits + 1, $window );
+		return true;
 	}
 }

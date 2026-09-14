@@ -47,7 +47,7 @@ $rk_whatsapp = get_theme_mod( 'guruexpertpowertools_whatsapp', '254708777192' );
 					$gx_logo_url = get_theme_file_uri( 'assets/img/logo.png' );
 				}
 				printf(
-					'<a href="%s" class="rk-logo__link" rel="home"><img class="rk-logo__img" src="%s" alt="%s" /></a>',
+					'<a href="%s" class="rk-logo__link" rel="home"><img class="rk-logo__img" src="%s" alt="%s" width="200" height="60" fetchpriority="high" decoding="async" /></a>',
 					esc_url( home_url( '/' ) ),
 					esc_url( $gx_logo_url ),
 					esc_attr( get_bloginfo( 'name' ) )

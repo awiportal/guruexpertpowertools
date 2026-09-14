@@ -136,7 +136,7 @@ body{background:var(--rk-bg)}
 /* ---------------- Floating + focus ---------------- */
 .rk-backtop{background:var(--rk-accent);color:var(--rk-navy)}
 .rk-backtop:hover{background:var(--rk-accent-600)}
-:focus-visible{outline-color:var(--rk-accent)}
+:focus-visible{outline:2px solid var(--rk-accent);outline-offset:2px}
 
 /* ---------------- Reduced motion ---------------- */
 @media(prefers-reduced-motion:reduce){
