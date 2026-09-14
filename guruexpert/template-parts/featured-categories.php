@@ -37,10 +37,21 @@ $gx_shop = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( '
 			<div class="gx-catrow__track">
 				<?php
 				foreach ( $gx_cats as $gx_cat ) {
-					$thumb_id = (int) get_term_meta( $gx_cat->term_id, 'thumbnail_id', true );
-					$img      = $thumb_id
-						? wp_get_attachment_image( $thumb_id, 'toptech-card', false, array( 'loading' => 'lazy', 'alt' => $gx_cat->name ) )
-						: ( function_exists( 'wc_placeholder_img' ) ? wc_placeholder_img( 'toptech-card' ) : '' );
+					// Prefer an on-brand bundled thumbnail (assets/img/categories/{slug}.jpg) when present,
+					// otherwise fall back to the WooCommerce category thumbnail or a placeholder.
+					$gx_bundled = 'assets/img/categories/' . $gx_cat->slug . '.jpg';
+					if ( file_exists( TOPTECH_DIR . $gx_bundled ) ) {
+						$img = sprintf(
+							'<img src="%1$s" width="480" height="360" loading="lazy" decoding="async" alt="%2$s">',
+							esc_url( TOPTECH_URI . $gx_bundled ),
+							esc_attr( $gx_cat->name )
+						);
+					} else {
+						$thumb_id = (int) get_term_meta( $gx_cat->term_id, 'thumbnail_id', true );
+						$img      = $thumb_id
+							? wp_get_attachment_image( $thumb_id, 'toptech-card', false, array( 'loading' => 'lazy', 'alt' => $gx_cat->name ) )
+							: ( function_exists( 'wc_placeholder_img' ) ? wc_placeholder_img( 'toptech-card' ) : '' );
+					}
 					printf(
 						'<a class="gx-cat" href="%1$s"><span class="gx-cat__img">%2$s</span><span class="gx-cat__overlay"><span class="gx-cat__name">%3$s</span><span class="gx-cat__count">%4$s</span></span></a>',
 						esc_url( get_term_link( $gx_cat ) ),
