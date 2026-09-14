@@ -4,7 +4,7 @@ This theme now installs like a premium ThemeForest theme:
 **Activate -> install required plugins -> import demo data -> import your full products.**
 
 ## Step 1 - Activate the theme
-Appearance -> Themes -> Add New -> Upload Theme -> upload `toptech-machinery.zip` -> Activate.
+Appearance -> Themes -> Add New -> Upload Theme -> upload `guruexpertpowertools.zip` -> Activate.
 (If an old copy exists, delete that theme first so the new files replace it.)
 
 ## Step 2 - Install required plugins (automatic prompt)

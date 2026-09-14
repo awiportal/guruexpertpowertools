@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: TopTech WebP Optimizer
+ * Plugin Name: Guru Expert Power Tools WebP Optimizer
  * Description: One-click WebP. Converts every JPEG and PNG in your Media Library to WebP, auto-converts new uploads, and serves WebP automatically to browsers that support it. Just install and activate - no settings to configure. Originals are never deleted.
- * Version: 1.0.0
- * Author: TopTech Machinery
+ * Version: 1.1.0
+ * Author: Guru Expert Power Tools
  * License: GPLv2 or later
  * Requires at least: 5.5
  * Requires PHP: 7.2
@@ -13,15 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TOPTECH_WEBP_VER', '1.0.0' );
-define( 'TOPTECH_WEBP_QUALITY', 82 );
-define( 'TOPTECH_WEBP_BATCH', 10 );
-define( 'TOPTECH_WEBP_MARKER', 'TopTech WebP' );
+define( 'GURUEXPERTPOWERTOOLS_WEBP_VER', '1.1.0' );
+define( 'GURUEXPERTPOWERTOOLS_WEBP_QUALITY', 82 );
+define( 'GURUEXPERTPOWERTOOLS_WEBP_BATCH', 10 );
+define( 'GURUEXPERTPOWERTOOLS_WEBP_MARKER', 'Guru Expert Power Tools WebP' );
 
 /**
  * Detect an available WebP engine. Returns 'gd', 'imagick', or '' (none).
  */
-function toptech_webp_engine() {
+function guruexpertpowertools_webp_engine() {
 	if ( function_exists( 'imagewebp' ) ) {
 		return 'gd';
 	}
@@ -41,7 +41,7 @@ function toptech_webp_engine() {
 /**
  * Convert one JPEG/PNG file to <source>.webp. The original is kept intact.
  */
-function toptech_webp_convert_file( $src, $force = false ) {
+function guruexpertpowertools_webp_convert_file( $src, $force = false ) {
 	if ( ! is_string( $src ) || ! is_readable( $src ) ) {
 		return false;
 	}
@@ -54,7 +54,7 @@ function toptech_webp_convert_file( $src, $force = false ) {
 		return true;
 	}
 
-	$engine = toptech_webp_engine();
+	$engine = guruexpertpowertools_webp_engine();
 	if ( '' === $engine ) {
 		return false;
 	}
@@ -70,7 +70,7 @@ function toptech_webp_convert_file( $src, $force = false ) {
 				$img->setImageAlphaChannel( Imagick::ALPHACHANNEL_ACTIVATE );
 			}
 			$img->setImageFormat( 'webp' );
-			$img->setImageCompressionQuality( TOPTECH_WEBP_QUALITY );
+			$img->setImageCompressionQuality( GURUEXPERTPOWERTOOLS_WEBP_QUALITY );
 			$img->setOption( 'webp:method', '4' );
 			$ok = $img->writeImage( $dest );
 			$img->clear();
@@ -96,7 +96,7 @@ function toptech_webp_convert_file( $src, $force = false ) {
 			return false;
 		}
 	}
-	$ok = @imagewebp( $image, $dest, TOPTECH_WEBP_QUALITY );
+	$ok = @imagewebp( $image, $dest, GURUEXPERTPOWERTOOLS_WEBP_QUALITY );
 	imagedestroy( $image );
 	if ( $ok && file_exists( $dest ) && filesize( $dest ) > 0 ) {
 		return true;
@@ -110,7 +110,7 @@ function toptech_webp_convert_file( $src, $force = false ) {
 /**
  * List every JPEG/PNG under wp-content/uploads (all sizes, all folders).
  */
-function toptech_webp_scan_uploads() {
+function guruexpertpowertools_webp_scan_uploads() {
 	$uploads = wp_get_upload_dir();
 	$base = isset( $uploads['basedir'] ) ? $uploads['basedir'] : '';
 	$list = array();
@@ -140,11 +140,11 @@ function toptech_webp_scan_uploads() {
 /**
  * Process up to $limit not-yet-converted images. Shared by the button and cron.
  */
-function toptech_webp_run_batch( $limit, $force = false ) {
-	$files = toptech_webp_scan_uploads();
+function guruexpertpowertools_webp_run_batch( $limit, $force = false ) {
+	$files = guruexpertpowertools_webp_scan_uploads();
 	$total = count( $files );
 
-	$failed_list = get_option( 'toptech_webp_failed', array() );
+	$failed_list = get_option( 'guruexpertpowertools_webp_failed', array() );
 	if ( ! is_array( $failed_list ) ) {
 		$failed_list = array();
 	}
@@ -173,7 +173,7 @@ function toptech_webp_run_batch( $limit, $force = false ) {
 		if ( $processed >= $limit ) {
 			break;
 		}
-		if ( toptech_webp_convert_file( $src, $force ) ) {
+		if ( guruexpertpowertools_webp_convert_file( $src, $force ) ) {
 			$converted++;
 			$done++;
 			unset( $failed_list[ $src ] );
@@ -183,7 +183,7 @@ function toptech_webp_run_batch( $limit, $force = false ) {
 		$processed++;
 	}
 
-	update_option( 'toptech_webp_failed', $failed_list, false );
+	update_option( 'guruexpertpowertools_webp_failed', $failed_list, false );
 
 	$finished = ( 0 === $converted ) || ( count( $todo ) - $processed <= 0 );
 
@@ -199,16 +199,16 @@ function toptech_webp_run_batch( $limit, $force = false ) {
 /**
  * Auto-convert freshly uploaded images (full size plus every generated size).
  */
-add_filter( 'wp_generate_attachment_metadata', 'toptech_webp_on_upload', 20, 2 );
-function toptech_webp_on_upload( $metadata, $attachment_id ) {
+add_filter( 'wp_generate_attachment_metadata', 'guruexpertpowertools_webp_on_upload', 20, 2 );
+function guruexpertpowertools_webp_on_upload( $metadata, $attachment_id ) {
 	$file = get_attached_file( $attachment_id );
 	if ( $file && is_string( $file ) ) {
-		toptech_webp_convert_file( $file );
+		guruexpertpowertools_webp_convert_file( $file );
 		$dir = trailingslashit( dirname( $file ) );
 		if ( ! empty( $metadata['sizes'] ) && is_array( $metadata['sizes'] ) ) {
 			foreach ( $metadata['sizes'] as $size ) {
 				if ( ! empty( $size['file'] ) ) {
-					toptech_webp_convert_file( $dir . $size['file'] );
+					guruexpertpowertools_webp_convert_file( $dir . $size['file'] );
 				}
 			}
 		}
@@ -219,7 +219,7 @@ function toptech_webp_on_upload( $metadata, $attachment_id ) {
 /* -------------------------------------------------------------------------
  * WebP delivery via .htaccess (transparent - URLs stay .jpg/.png).
  * ---------------------------------------------------------------------- */
-function toptech_webp_htaccess_lines() {
+function guruexpertpowertools_webp_htaccess_lines() {
 	return array(
 		'<IfModule mod_rewrite.c>',
 		'  RewriteEngine On',
@@ -238,7 +238,7 @@ function toptech_webp_htaccess_lines() {
 	);
 }
 
-function toptech_webp_write_htaccess() {
+function guruexpertpowertools_webp_write_htaccess() {
 	if ( ! function_exists( 'insert_with_markers' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/misc.php';
 	}
@@ -250,82 +250,82 @@ function toptech_webp_write_htaccess() {
 	} elseif ( ! is_writable( $htaccess ) ) {
 		return false;
 	}
-	return insert_with_markers( $htaccess, TOPTECH_WEBP_MARKER, toptech_webp_htaccess_lines() );
+	return insert_with_markers( $htaccess, GURUEXPERTPOWERTOOLS_WEBP_MARKER, guruexpertpowertools_webp_htaccess_lines() );
 }
 
-function toptech_webp_remove_htaccess() {
+function guruexpertpowertools_webp_remove_htaccess() {
 	if ( ! function_exists( 'insert_with_markers' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/misc.php';
 	}
 	$htaccess = ABSPATH . '.htaccess';
 	if ( file_exists( $htaccess ) && is_writable( $htaccess ) ) {
-		insert_with_markers( $htaccess, TOPTECH_WEBP_MARKER, array() );
+		insert_with_markers( $htaccess, GURUEXPERTPOWERTOOLS_WEBP_MARKER, array() );
 	}
 }
 
 /* -------------------------------------------------------------------------
  * Background processing via WP-Cron (so it finishes even without clicking).
  * ---------------------------------------------------------------------- */
-add_filter( 'cron_schedules', 'toptech_webp_cron_schedule' );
-function toptech_webp_cron_schedule( $schedules ) {
-	$schedules['toptech_webp_5min'] = array(
+add_filter( 'cron_schedules', 'guruexpertpowertools_webp_cron_schedule' );
+function guruexpertpowertools_webp_cron_schedule( $schedules ) {
+	$schedules['guruexpertpowertools_webp_5min'] = array(
 		'interval' => 300,
-		'display'  => 'Every 5 minutes (TopTech WebP)',
+		'display'  => 'Every 5 minutes (Guru Expert Power Tools WebP)',
 	);
 	return $schedules;
 }
 
-add_action( 'toptech_webp_cron', 'toptech_webp_cron_run' );
-function toptech_webp_cron_run() {
-	if ( '' === toptech_webp_engine() ) {
+add_action( 'guruexpertpowertools_webp_cron', 'guruexpertpowertools_webp_cron_run' );
+function guruexpertpowertools_webp_cron_run() {
+	if ( '' === guruexpertpowertools_webp_engine() ) {
 		return;
 	}
-	toptech_webp_run_batch( 15, false );
+	guruexpertpowertools_webp_run_batch( 15, false );
 }
 
 /* -------------------------------------------------------------------------
  * Activation / deactivation / uninstall.
  * ---------------------------------------------------------------------- */
-register_activation_hook( __FILE__, 'toptech_webp_activate' );
-function toptech_webp_activate() {
-	toptech_webp_write_htaccess();
-	if ( ! wp_next_scheduled( 'toptech_webp_cron' ) ) {
-		wp_schedule_event( time() + 60, 'toptech_webp_5min', 'toptech_webp_cron' );
+register_activation_hook( __FILE__, 'guruexpertpowertools_webp_activate' );
+function guruexpertpowertools_webp_activate() {
+	guruexpertpowertools_webp_write_htaccess();
+	if ( ! wp_next_scheduled( 'guruexpertpowertools_webp_cron' ) ) {
+		wp_schedule_event( time() + 60, 'guruexpertpowertools_webp_5min', 'guruexpertpowertools_webp_cron' );
 	}
 }
 
-register_deactivation_hook( __FILE__, 'toptech_webp_deactivate' );
-function toptech_webp_deactivate() {
-	toptech_webp_remove_htaccess();
-	$ts = wp_next_scheduled( 'toptech_webp_cron' );
+register_deactivation_hook( __FILE__, 'guruexpertpowertools_webp_deactivate' );
+function guruexpertpowertools_webp_deactivate() {
+	guruexpertpowertools_webp_remove_htaccess();
+	$ts = wp_next_scheduled( 'guruexpertpowertools_webp_cron' );
 	if ( $ts ) {
-		wp_unschedule_event( $ts, 'toptech_webp_cron' );
+		wp_unschedule_event( $ts, 'guruexpertpowertools_webp_cron' );
 	}
 }
 
-register_uninstall_hook( __FILE__, 'toptech_webp_uninstall' );
-function toptech_webp_uninstall() {
-	delete_option( 'toptech_webp_failed' );
+register_uninstall_hook( __FILE__, 'guruexpertpowertools_webp_uninstall' );
+function guruexpertpowertools_webp_uninstall() {
+	delete_option( 'guruexpertpowertools_webp_failed' );
 }
 
 /* -------------------------------------------------------------------------
  * Admin page + AJAX.
  * ---------------------------------------------------------------------- */
-add_action( 'admin_menu', 'toptech_webp_menu' );
-function toptech_webp_menu() {
-	add_media_page( 'WebP Optimizer', 'WebP Optimizer', 'manage_options', 'toptech-webp', 'toptech_webp_admin_page' );
+add_action( 'admin_menu', 'guruexpertpowertools_webp_menu' );
+function guruexpertpowertools_webp_menu() {
+	add_media_page( 'WebP Optimizer', 'WebP Optimizer', 'manage_options', 'guruexpertpowertools-webp', 'guruexpertpowertools_webp_admin_page' );
 }
 
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'toptech_webp_action_link' );
-function toptech_webp_action_link( $links ) {
-	$url = admin_url( 'upload.php?page=toptech-webp' );
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'guruexpertpowertools_webp_action_link' );
+function guruexpertpowertools_webp_action_link( $links ) {
+	$url = admin_url( 'upload.php?page=guruexpertpowertools-webp' );
 	array_unshift( $links, '<a href="' . esc_url( $url ) . '">Optimize</a>' );
 	return $links;
 }
 
-add_action( 'wp_ajax_toptech_webp_run', 'toptech_webp_ajax_run' );
-function toptech_webp_ajax_run() {
-	check_ajax_referer( 'toptech_webp', 'nonce' );
+add_action( 'wp_ajax_guruexpertpowertools_webp_run', 'guruexpertpowertools_webp_ajax_run' );
+function guruexpertpowertools_webp_ajax_run() {
+	check_ajax_referer( 'guruexpertpowertools_webp', 'nonce' );
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_send_json_error( 'forbidden' );
 	}
@@ -333,16 +333,16 @@ function toptech_webp_ajax_run() {
 		@set_time_limit( 0 );
 	}
 	$force = ! empty( $_POST['force'] );
-	$res   = toptech_webp_run_batch( TOPTECH_WEBP_BATCH, $force );
+	$res   = guruexpertpowertools_webp_run_batch( GURUEXPERTPOWERTOOLS_WEBP_BATCH, $force );
 	wp_send_json_success( $res );
 }
 
-function toptech_webp_admin_page() {
+function guruexpertpowertools_webp_admin_page() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
-	$engine = toptech_webp_engine();
-	$files  = toptech_webp_scan_uploads();
+	$engine = guruexpertpowertools_webp_engine();
+	$files  = guruexpertpowertools_webp_scan_uploads();
 	$total  = count( $files );
 	$done   = 0;
 	foreach ( $files as $f ) {
@@ -351,7 +351,7 @@ function toptech_webp_admin_page() {
 		}
 	}
 	$pct          = $total > 0 ? (int) round( $done / $total * 100 ) : 100;
-	$nonce        = wp_create_nonce( 'toptech_webp' );
+	$nonce        = wp_create_nonce( 'guruexpertpowertools_webp' );
 	$ajax         = admin_url( 'admin-ajax.php' );
 	$engine_label = 'gd' === $engine ? 'GD (imagewebp)' : ( 'imagick' === $engine ? 'Imagick' : 'NONE' );
 	?>
@@ -385,7 +385,7 @@ function toptech_webp_admin_page() {
 			var running = false;
 			function step( force ) {
 				var fd = new FormData();
-				fd.append( 'action', 'toptech_webp_run' );
+				fd.append( 'action', 'guruexpertpowertools_webp_run' );
 				fd.append( 'nonce', RKW.nonce );
 				if ( force ) { fd.append( 'force', '1' ); }
 				return fetch( RKW.ajax, { method: 'POST', body: fd, credentials: 'same-origin' } ).then( function ( r ) { return r.json(); } );
@@ -426,16 +426,16 @@ function toptech_webp_admin_page() {
 }
 
 /* Admin notice if the server lacks a WebP engine. */
-add_action( 'admin_notices', 'toptech_webp_admin_notice' );
-function toptech_webp_admin_notice() {
+add_action( 'admin_notices', 'guruexpertpowertools_webp_admin_notice' );
+function guruexpertpowertools_webp_admin_notice() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
 	$screen = get_current_screen();
-	if ( $screen && 'media_page_toptech-webp' === $screen->id ) {
+	if ( $screen && 'media_page_guruexpertpowertools-webp' === $screen->id ) {
 		return;
 	}
-	if ( '' === toptech_webp_engine() ) {
-		echo '<div class="notice notice-warning is-dismissible"><p><strong>TopTech WebP:</strong> this server has no WebP engine (GD or Imagick). Ask your host to enable it so images can be converted.</p></div>';
+	if ( '' === guruexpertpowertools_webp_engine() ) {
+		echo '<div class="notice notice-warning is-dismissible"><p><strong>Guru Expert Power Tools WebP:</strong> this server has no WebP engine (GD or Imagick). Ask your host to enable it so images can be converted.</p></div>';
 	}
 }

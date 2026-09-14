@@ -2,15 +2,15 @@
 /**
  * Site header: top bar, logo + search + actions, primary nav, sticky.
  *
- * @package ToptechMachinery
+ * @package GuruExpertPowerTools
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$rk_phone    = get_theme_mod( 'toptech_phone', '+254 708 777192' );
-$rk_email    = get_theme_mod( 'toptech_email', 'info@guruexpertpowertools.co.ke' );
-$rk_hours    = get_theme_mod( 'toptech_hours', 'Mon - Sat, 9AM - 5PM' );
-$rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
+$rk_phone    = get_theme_mod( 'guruexpertpowertools_phone', '+254 708 777192' );
+$rk_email    = get_theme_mod( 'guruexpertpowertools_email', 'info@guruexpertpowertools.co.ke' );
+$rk_hours    = get_theme_mod( 'guruexpertpowertools_hours', 'Mon - Sat, 9AM - 5PM' );
+$rk_whatsapp = get_theme_mod( 'guruexpertpowertools_whatsapp', '254708777192' );
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -22,14 +22,14 @@ $rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<a class="sr-only" href="#primary"><?php esc_html_e( 'Skip to content', 'toptech-machinery' ); ?></a>
+<a class="sr-only" href="#primary"><?php esc_html_e( 'Skip to content', 'guruexpertpowertools' ); ?></a>
 
 <header class="rk-header">
 	<div class="rk-header__top">
 		<div class="container">
 			<div class="rk-header__hours"><?php echo esc_html( $rk_hours ); ?></div>
 			<div class="rk-header__contact">
-				<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $rk_phone ) ); ?>"><?php echo esc_html( __( 'Call: ', 'toptech-machinery' ) . $rk_phone ); ?></a>
+				<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $rk_phone ) ); ?>"><?php echo esc_html( __( 'Call: ', 'guruexpertpowertools' ) . $rk_phone ); ?></a>
 				<a href="https://wa.me/<?php echo esc_attr( $rk_whatsapp ); ?>" rel="noopener" target="_blank">WhatsApp</a>
 				<a href="mailto:<?php echo esc_attr( $rk_email ); ?>"><?php echo esc_html( $rk_email ); ?></a>
 			</div>
@@ -38,7 +38,7 @@ $rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
 
 	<div class="rk-header__mid">
 		<div class="container">
-			<button class="rk-nav-toggle" aria-expanded="false" aria-controls="rk-primary-menu" aria-label="<?php esc_attr_e( 'Menu', 'toptech-machinery' ); ?>"><span class="rk-burger"></span></button>
+			<button class="rk-nav-toggle" aria-expanded="false" aria-controls="rk-primary-menu" aria-label="<?php esc_attr_e( 'Menu', 'guruexpertpowertools' ); ?>"><span class="rk-burger"></span></button>
 			<div class="rk-logo">
 				<?php
 				if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
@@ -51,7 +51,7 @@ $rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
 
 			<div class="rk-search">
 				<?php get_search_form(); ?>
-				<div class="rk-search__panel" role="listbox" aria-label="<?php esc_attr_e( 'Search suggestions', 'toptech-machinery' ); ?>"></div>
+				<div class="rk-search__panel" role="listbox" aria-label="<?php esc_attr_e( 'Search suggestions', 'guruexpertpowertools' ); ?>"></div>
 			</div>
 
 			<div class="rk-actions">
@@ -63,24 +63,24 @@ $rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
 				?>
 				<a class="rk-actions__item" href="<?php echo esc_url( $rk_account ); ?>">
 					<?php echo rk_icon( 'user' ); // phpcs:ignore ?>
-					<span><?php esc_html_e( 'Account', 'toptech-machinery' ); ?></span>
+					<span><?php esc_html_e( 'Account', 'guruexpertpowertools' ); ?></span>
 				</a>
 				<a class="rk-actions__item" href="<?php echo esc_url( home_url( '/wishlist/' ) ); ?>">
 					<?php echo rk_icon( 'heart' ); // phpcs:ignore ?>
-					<span><?php esc_html_e( 'Wishlist', 'toptech-machinery' ); ?></span>
+					<span><?php esc_html_e( 'Wishlist', 'guruexpertpowertools' ); ?></span>
 				</a>
 				<?php if ( $rk_has_wc ) : ?>
 				<a class="rk-actions__item" href="<?php echo esc_url( $rk_cart_url ); ?>" data-rk-drawer-open>
 					<?php echo rk_icon( 'cart' ); // phpcs:ignore ?>
 					<span class="rk-cart-count" data-count="<?php echo esc_attr( $rk_cart_ct ); ?>"><?php echo esc_html( $rk_cart_ct ); ?></span>
-					<span><?php esc_html_e( 'Cart', 'toptech-machinery' ); ?></span>
+					<span><?php esc_html_e( 'Cart', 'guruexpertpowertools' ); ?></span>
 				</a>
 				<?php endif; ?>
 			</div>
 		</div>
 	</div>
 
-	<nav class="rk-nav" aria-label="<?php esc_attr_e( 'Primary', 'toptech-machinery' ); ?>">
+	<nav class="rk-nav" aria-label="<?php esc_attr_e( 'Primary', 'guruexpertpowertools' ); ?>">
 		<div class="container">
 			<?php
 			wp_nav_menu(
@@ -97,8 +97,8 @@ $rk_whatsapp = get_theme_mod( 'toptech_whatsapp', '254708777192' );
 	</nav>
 	<nav class="rk-mobile" id="rk-mobile" aria-label="Shop by category" aria-hidden="true">
 		<div class="rk-mobile__head">
-			<span><?php esc_html_e( 'Shop by Category', 'toptech-machinery' ); ?></span>
-			<button type="button" class="rk-mobile__close" data-rk-mob-close aria-label="<?php esc_attr_e( 'Close menu', 'toptech-machinery' ); ?>">&times;</button>
+			<span><?php esc_html_e( 'Shop by Category', 'guruexpertpowertools' ); ?></span>
+			<button type="button" class="rk-mobile__close" data-rk-mob-close aria-label="<?php esc_attr_e( 'Close menu', 'guruexpertpowertools' ); ?>">&times;</button>
 		</div>
 		<ul class="rk-mobile__cats">
 			<?php

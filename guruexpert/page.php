@@ -2,14 +2,14 @@
 /**
  * Default page template (About, Policies, Contact, etc.).
  *
- * @package ToptechMachinery
+ * @package GuruExpertPowerTools
  */
 
 defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
-<nav class="rk-breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'toptech-machinery' ); ?>">
-	<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'toptech-machinery' ); ?></a>
+<nav class="rk-breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'guruexpertpowertools' ); ?>">
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'guruexpertpowertools' ); ?></a>
 	<span class="rk-crumb-sep" aria-hidden="true">/</span>
 	<span><?php the_title(); ?></span>
 </nav>

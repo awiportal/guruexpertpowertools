@@ -6,16 +6,16 @@
  * times out on shared hosting. We prompt only the essentials; users can add
  * SEO / caching / invoicing plugins later from Plugins > Add New.
  *
- * @package ToptechMachinery
+ * @package GuruExpertPowerTools
  */
 
 declare( strict_types = 1 );
 
 defined( 'ABSPATH' ) || exit;
 
-$toptech_tgmpa = TOPTECH_DIR . 'inc/tgmpa/class-tgm-plugin-activation.php';
-if ( is_readable( $toptech_tgmpa ) ) {
-	require $toptech_tgmpa;
+$guruexpertpowertools_tgmpa = GURUEXPERTPOWERTOOLS_DIR . 'inc/tgmpa/class-tgm-plugin-activation.php';
+if ( is_readable( $guruexpertpowertools_tgmpa ) ) {
+	require $guruexpertpowertools_tgmpa;
 }
 
 add_action(
@@ -34,8 +34,8 @@ add_action(
 		);
 
 		$config = array(
-			'id'           => 'toptech-machinery',
-			'menu'         => 'toptech-install-plugins',
+			'id'           => 'guruexpertpowertools',
+			'menu'         => 'guruexpertpowertools-install-plugins',
 			'parent_slug'  => 'themes.php',
 			'capability'   => 'edit_theme_options',
 			'has_notices'  => true,

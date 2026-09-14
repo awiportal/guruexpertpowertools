@@ -2,7 +2,7 @@
 /**
  * Generic fallback template (blog home and archives).
  *
- * @package ToptechMachinery
+ * @package GuruExpertPowerTools
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -28,7 +28,7 @@ get_header();
 					<h2 class="rk-post__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 					<div class="rk-post__meta"><?php echo esc_html( get_the_date() ); ?></div>
 					<div class="rk-post__excerpt"><?php the_excerpt(); ?></div>
-					<a class="rk-post__more" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Read more', 'toptech-machinery' ); ?> &rarr;</a>
+					<a class="rk-post__more" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Read more', 'guruexpertpowertools' ); ?> &rarr;</a>
 				</article>
 				<?php
 			endwhile;
@@ -37,10 +37,10 @@ get_header();
 		<?php the_posts_pagination( array( 'mid_size' => 1 ) ); ?>
 	<?php else : ?>
 		<div class="rk-empty">
-			<h1><?php esc_html_e( 'Nothing here yet', 'toptech-machinery' ); ?></h1>
-			<p><?php esc_html_e( 'There is nothing to show here right now. Try a search or head back to the homepage.', 'toptech-machinery' ); ?></p>
+			<h1><?php esc_html_e( 'Nothing here yet', 'guruexpertpowertools' ); ?></h1>
+			<p><?php esc_html_e( 'There is nothing to show here right now. Try a search or head back to the homepage.', 'guruexpertpowertools' ); ?></p>
 			<div class="rk-empty__actions">
-				<a class="rk-btn rk-btn--primary" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Back to home', 'toptech-machinery' ); ?></a>
+				<a class="rk-btn rk-btn--primary" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Back to home', 'guruexpertpowertools' ); ?></a>
 			</div>
 			<div class="rk-empty__search"><?php get_search_form(); ?></div>
 		</div>

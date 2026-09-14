@@ -1,8 +1,8 @@
-=== TopTech WebP Optimizer ===
-Contributors: toptechtools
+=== Guru Expert Power Tools WebP Optimizer ===
+Contributors: guruexpertpowertools
 Requires at least: 5.5
 Requires PHP: 7.2
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 
 One-click WebP for WooCommerce/WordPress. Install, activate, done.

@@ -3,7 +3,7 @@
  * Homepage: hero, benefits, category mosaic, promo split, product rows,
  * brand strip and closing call to action.
  *
- * @package ToptechMachinery
+ * @package GuruExpertPowerTools
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,10 +26,10 @@ get_header();
 		<?php
 		/**
 		 * Product rows, one per featured category. Slugs can be changed via the
-		 * toptech_homepage_categories filter or by editing this array.
+		 * guruexpertpowertools_homepage_categories filter or by editing this array.
 		 */
 		$rk_sections = apply_filters(
-			'toptech_homepage_categories',
+			'guruexpertpowertools_homepage_categories',
 			array( 'water-pumps', 'power-tools', 'solar-panels', 'welding-machines', 'generators', 'batteries' )
 		);
 		foreach ( $rk_sections as $rk_slug ) {

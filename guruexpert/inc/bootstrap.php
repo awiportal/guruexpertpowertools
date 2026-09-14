@@ -2,37 +2,37 @@
 /**
  * Instantiate theme modules on load (each guarded).
  *
- * @package ToptechMachinery
+ * @package GuruExpertPowerTools
  */
 
 declare( strict_types = 1 );
 
 defined( 'ABSPATH' ) || exit;
 
-require TOPTECH_DIR . 'inc/helpers.php';
+require GURUEXPERTPOWERTOOLS_DIR . 'inc/helpers.php';
 
-$toptech_modules = array(
-	'ToptechMachinery\\Setup',
-	'ToptechMachinery\\Assets',
-	'ToptechMachinery\\Security',
-	'ToptechMachinery\\WooCommerce_Support',
-	'ToptechMachinery\\Ajax',
-	'ToptechMachinery\\Customizer',
-	'ToptechMachinery\\Schema',
-	'ToptechMachinery\\Content_Installer',
-	'ToptechMachinery\\Demo_Import',
-	'ToptechMachinery\\Single_Product',
-		'ToptechMachinery\\Merchant_Inspector',
+$guruexpertpowertools_modules = array(
+	'GuruExpertPowerTools\\Setup',
+	'GuruExpertPowerTools\\Assets',
+	'GuruExpertPowerTools\\Security',
+	'GuruExpertPowerTools\\WooCommerce_Support',
+	'GuruExpertPowerTools\\Ajax',
+	'GuruExpertPowerTools\\Customizer',
+	'GuruExpertPowerTools\\Schema',
+	'GuruExpertPowerTools\\Content_Installer',
+	'GuruExpertPowerTools\\Demo_Import',
+	'GuruExpertPowerTools\\Single_Product',
+		'GuruExpertPowerTools\\Merchant_Inspector',
 );
 
-foreach ( $toptech_modules as $toptech_class ) {
+foreach ( $guruexpertpowertools_modules as $guruexpertpowertools_class ) {
 	try {
-		if ( class_exists( $toptech_class ) ) {
-			( new $toptech_class() )->hooks();
+		if ( class_exists( $guruexpertpowertools_class ) ) {
+			( new $guruexpertpowertools_class() )->hooks();
 		}
 	} catch ( \Throwable $e ) {
-		error_log( 'Guru Expert Power Tools module ' . $toptech_class . ' failed: ' . $e->getMessage() );
+		error_log( 'Guru Expert Power Tools module ' . $guruexpertpowertools_class . ' failed: ' . $e->getMessage() );
 	}
 }
 
-require TOPTECH_DIR . 'inc/required-plugins.php';
+require GURUEXPERTPOWERTOOLS_DIR . 'inc/required-plugins.php';

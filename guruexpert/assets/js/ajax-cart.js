@@ -1,7 +1,7 @@
 /* Guru Expert Power Tools - AJAX add-to-cart with slide-in cart drawer, mini-cart fragments, live search. */
 (() => {
   'use strict';
-  if (typeof ToptechAjax === 'undefined') return;
+  if (typeof GuruExpertPowerToolsAjax === 'undefined') return;
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 
@@ -34,17 +34,17 @@
     if (btn) { label = btn.innerHTML; btn.disabled = true; btn.classList.add('is-loading'); }
     if (drawer) { drawer.classList.add('is-loading'); openDrawer(); }
     try {
-      const body = new URLSearchParams({ action: 'toptech_add_to_cart', nonce: ToptechAjax.nonce, product_id: id, quantity: qty || 1 });
-      const res = await fetch(ToptechAjax.ajaxUrl, { method: 'POST', body, credentials: 'same-origin' });
+      const body = new URLSearchParams({ action: 'guruexpertpowertools_add_to_cart', nonce: GuruExpertPowerToolsAjax.nonce, product_id: id, quantity: qty || 1 });
+      const res = await fetch(GuruExpertPowerToolsAjax.ajaxUrl, { method: 'POST', body, credentials: 'same-origin' });
       const data = await res.json();
       if (applyFragments(data)) {
         if (window.jQuery) { try { window.jQuery(document.body).trigger('added_to_cart', [data.fragments, data.cart_hash || '', null]); } catch (e) {} }
         openDrawer();
       } else {
-        window.location.href = ToptechAjax.cartUrl;
+        window.location.href = GuruExpertPowerToolsAjax.cartUrl;
       }
     } catch (err) {
-      window.location.href = ToptechAjax.cartUrl;
+      window.location.href = GuruExpertPowerToolsAjax.cartUrl;
     } finally {
       if (btn) { btn.disabled = false; btn.classList.remove('is-loading'); if (label !== undefined) btn.innerHTML = label; }
       if (drawer) drawer.classList.remove('is-loading');
@@ -53,8 +53,8 @@
 
   /* Delegated clicks: card add buttons + drawer open/close */
   document.addEventListener('click', (e) => {
-    const add = e.target.closest('[data-toptech-add]');
-    if (add) { e.preventDefault(); addToCart(add.getAttribute('data-toptech-add'), add.getAttribute('data-qty') || 1, add); return; }
+    const add = e.target.closest('[data-guruexpertpowertools-add]');
+    if (add) { e.preventDefault(); addToCart(add.getAttribute('data-guruexpertpowertools-add'), add.getAttribute('data-qty') || 1, add); return; }
     const wcAdd = e.target.closest('a.add_to_cart_button[data-product_id], .ajax_add_to_cart[data-product_id]');
     if (wcAdd) {
       const complex = wcAdd.classList.contains('product_type_variable') || wcAdd.classList.contains('product_type_grouped');
@@ -111,7 +111,7 @@
       if (ctrl) ctrl.abort();
       ctrl = new AbortController();
       try {
-        const url = `${ToptechAjax.ajaxUrl}?action=toptech_search&nonce=${ToptechAjax.nonce}&q=${encodeURIComponent(q)}`;
+        const url = `${GuruExpertPowerToolsAjax.ajaxUrl}?action=guruexpertpowertools_search&nonce=${GuruExpertPowerToolsAjax.nonce}&q=${encodeURIComponent(q)}`;
         const res = await fetch(url, { signal: ctrl.signal, credentials: 'same-origin' });
         const json = await res.json();
         if (json && json.success) { cache.set(q, json.data); render(json.data); }

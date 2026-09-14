@@ -2,12 +2,12 @@
 /**
  * Front-end + editor asset loading with performance defaults.
  *
- * @package ToptechMachinery
+ * @package GuruExpertPowerTools
  */
 
 declare( strict_types = 1 );
 
-namespace ToptechMachinery;
+namespace GuruExpertPowerTools;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -26,33 +26,33 @@ final class Assets {
 	}
 
 	public function enqueue(): void {
-		$css_rel = file_exists( TOPTECH_DIR . 'assets/css/theme.min.css' ) ? 'assets/css/theme.min.css' : 'assets/css/theme.css';
-		wp_enqueue_style( 'toptech-theme', TOPTECH_URI . $css_rel, array(), TOPTECH_VERSION );
-		wp_style_add_data( 'toptech-theme', 'rtl', 'replace' );
-		wp_enqueue_style( 'toptech-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap', array(), null );
-		wp_enqueue_style( 'toptech-industrial', TOPTECH_URI . 'assets/css/theme-industrial.css', array( 'toptech-theme' ), TOPTECH_VERSION );
+		$css_rel = file_exists( GURUEXPERTPOWERTOOLS_DIR . 'assets/css/theme.min.css' ) ? 'assets/css/theme.min.css' : 'assets/css/theme.css';
+		wp_enqueue_style( 'guruexpertpowertools-theme', GURUEXPERTPOWERTOOLS_URI . $css_rel, array(), GURUEXPERTPOWERTOOLS_VERSION );
+		wp_style_add_data( 'guruexpertpowertools-theme', 'rtl', 'replace' );
+		wp_enqueue_style( 'guruexpertpowertools-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap', array(), null );
+		wp_enqueue_style( 'guruexpertpowertools-industrial', GURUEXPERTPOWERTOOLS_URI . 'assets/css/theme-industrial.css', array( 'guruexpertpowertools-theme' ), GURUEXPERTPOWERTOOLS_VERSION );
 
 		// Homepage-only design layer.
 		if ( is_front_page() ) {
-			wp_enqueue_style( 'toptech-home', TOPTECH_URI . 'assets/css/home.css', array( 'toptech-industrial' ), TOPTECH_VERSION );
+			wp_enqueue_style( 'guruexpertpowertools-home', GURUEXPERTPOWERTOOLS_URI . 'assets/css/home.css', array( 'guruexpertpowertools-industrial' ), GURUEXPERTPOWERTOOLS_VERSION );
 		}
 
-		wp_enqueue_script( 'toptech-theme', TOPTECH_URI . 'assets/js/theme.js', array(), TOPTECH_VERSION, true );
+		wp_enqueue_script( 'guruexpertpowertools-theme', GURUEXPERTPOWERTOOLS_URI . 'assets/js/theme.js', array(), GURUEXPERTPOWERTOOLS_VERSION, true );
 
 		if ( class_exists( 'WooCommerce' ) ) {
-			wp_enqueue_script( 'toptech-ajax', TOPTECH_URI . 'assets/js/ajax-cart.js', array( 'toptech-theme' ), TOPTECH_VERSION, true );
+			wp_enqueue_script( 'guruexpertpowertools-ajax', GURUEXPERTPOWERTOOLS_URI . 'assets/js/ajax-cart.js', array( 'guruexpertpowertools-theme' ), GURUEXPERTPOWERTOOLS_VERSION, true );
 			wp_localize_script(
-				'toptech-ajax',
-				'ToptechAjax',
+				'guruexpertpowertools-ajax',
+				'GuruExpertPowerToolsAjax',
 				array(
 					'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
-					'nonce'     => wp_create_nonce( 'toptech_ajax' ),
+					'nonce'     => wp_create_nonce( 'guruexpertpowertools_ajax' ),
 					'cartUrl'   => wc_get_cart_url(),
 					'i18n'      => array(
-						'added'   => esc_html__( 'Added to cart', 'toptech-machinery' ),
-						'adding'  => esc_html__( 'Adding...', 'toptech-machinery' ),
-						'error'   => esc_html__( 'Something went wrong. Please try again.', 'toptech-machinery' ),
-						'viewCart'=> esc_html__( 'View cart', 'toptech-machinery' ),
+						'added'   => esc_html__( 'Added to cart', 'guruexpertpowertools' ),
+						'adding'  => esc_html__( 'Adding...', 'guruexpertpowertools' ),
+						'error'   => esc_html__( 'Something went wrong. Please try again.', 'guruexpertpowertools' ),
+						'viewCart'=> esc_html__( 'View cart', 'guruexpertpowertools' ),
 					),
 				)
 			);
@@ -67,14 +67,14 @@ final class Assets {
 	 * Inline minimal critical CSS for fast FCP. Uses system fonts (no webfont download).
 	 */
 	public function preload_and_critical(): void {
-		echo '<style id="toptech-critical">:root{--rk-primary:#208050;--rk-navy:#0E2A1C}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1a1f2e;background:#fff}.rk-header{background:var(--rk-navy)}img{max-width:100%;height:auto}</style>' . "\n";
+		echo '<style id="guruexpertpowertools-critical">:root{--rk-primary:#208050;--rk-navy:#0E2A1C}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1a1f2e;background:#fff}.rk-header{background:var(--rk-navy)}img{max-width:100%;height:auto}</style>' . "\n";
 	}
 
 	/**
 	 * Defer all theme JS to remove render-blocking.
 	 */
 	public function defer_scripts( $tag, $handle = '', $src = '' ) {
-		$defer = array( 'toptech-theme', 'toptech-ajax' );
+		$defer = array( 'guruexpertpowertools-theme', 'guruexpertpowertools-ajax' );
 		if ( is_string( $tag ) && in_array( $handle, $defer, true ) && false === strpos( $tag, 'defer' ) ) {
 			$tag = str_replace( ' src', ' defer src', $tag );
 		}
