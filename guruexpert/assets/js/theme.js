@@ -85,4 +85,104 @@
     on(window, 'scroll', () => top.classList.toggle('is-visible', window.scrollY > 600), { passive: true });
     on(top, 'click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Homepage hero slider (autoplay, arrows, dots, swipe, keyboard) */
+  const heroSlider = $('.gx-hero-slider[data-gx-slider]');
+  if (heroSlider) {
+    const slides = $$('.gx-slide', heroSlider);
+    const dots = $$('.gx-slider__dot', heroSlider);
+    const prevBtn = $('.gx-slider__arrow--prev', heroSlider);
+    const nextBtn = $('.gx-slider__arrow--next', heroSlider);
+    if (slides.length > 1) {
+      heroSlider.classList.add('is-ready');
+      const DURATION = 6000;
+      let idx = Math.max(0, slides.findIndex((s) => s.classList.contains('is-active')));
+      let timer = null;
+      const render = () => {
+        slides.forEach((s, i) => {
+          const active = i === idx;
+          s.classList.toggle('is-active', active);
+          if (active) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true');
+        });
+        dots.forEach((d, i) => {
+          const active = i === idx;
+          d.classList.toggle('is-active', active);
+          d.setAttribute('aria-current', active ? 'true' : 'false');
+        });
+      };
+      const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+      const play = () => { if (prefersReduced) return; stop(); timer = setInterval(() => { idx = (idx + 1) % slides.length; render(); }, DURATION); };
+      const goTo = (n) => { idx = (n + slides.length) % slides.length; render(); play(); };
+      if (prevBtn) on(prevBtn, 'click', () => goTo(idx - 1));
+      if (nextBtn) on(nextBtn, 'click', () => goTo(idx + 1));
+      dots.forEach((d, i) => on(d, 'click', () => goTo(i)));
+      on(heroSlider, 'mouseenter', stop);
+      on(heroSlider, 'mouseleave', play);
+      on(heroSlider, 'focusin', stop);
+      on(heroSlider, 'focusout', play);
+      on(heroSlider, 'keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(idx - 1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(idx + 1); }
+      });
+      let touchX = null;
+      on(heroSlider, 'touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+      on(heroSlider, 'touchend', (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 45) goTo(idx + (dx < 0 ? 1 : -1));
+        touchX = null;
+      }, { passive: true });
+      on(document, 'visibilitychange', () => { if (document.hidden) stop(); else play(); });
+      render();
+      play();
+    }
+  }
+
+  /* Homepage "Shop by category" horizontal slider */
+  const catRow = $('[data-gx-catrow]');
+  if (catRow) {
+    const vp = $('[data-gx-catrow-vp]', catRow);
+    const catPrev = $('.gx-catrow__nav--prev', catRow);
+    const catNext = $('.gx-catrow__nav--next', catRow);
+    if (vp) {
+      const step = () => Math.max(vp.clientWidth * 0.8, 220);
+      const update = () => {
+        const max = vp.scrollWidth - vp.clientWidth - 2;
+        const scrollable = vp.scrollWidth > vp.clientWidth + 4;
+        [catPrev, catNext].forEach((b) => { if (b) b.hidden = !scrollable; });
+        if (catPrev) catPrev.classList.toggle('is-disabled', vp.scrollLeft <= 2);
+        if (catNext) catNext.classList.toggle('is-disabled', vp.scrollLeft >= max);
+      };
+      if (catPrev) on(catPrev, 'click', () => vp.scrollBy({ left: -step(), behavior: prefersReduced ? 'auto' : 'smooth' }));
+      if (catNext) on(catNext, 'click', () => vp.scrollBy({ left: step(), behavior: prefersReduced ? 'auto' : 'smooth' }));
+      on(vp, 'scroll', update, { passive: true });
+      on(window, 'resize', update, { passive: true });
+      /* Drag-to-scroll with a mouse; suppress the click that would otherwise fire after a drag. */
+      let down = false, startX = 0, startLeft = 0, moved = false;
+      on(vp, 'pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; startX = e.clientX; startLeft = vp.scrollLeft; vp.classList.add('is-drag'); });
+      on(vp, 'pointermove', (e) => { if (!down) return; const dx = e.clientX - startX; if (Math.abs(dx) > 4) moved = true; vp.scrollLeft = startLeft - dx; });
+      const endDrag = () => { down = false; vp.classList.remove('is-drag'); };
+      on(vp, 'pointerup', endDrag);
+      on(vp, 'pointercancel', endDrag);
+      on(vp, 'pointerleave', endDrag);
+      on(vp, 'click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+      update();
+    }
+  }
+
+  /* Subtle reveal-on-scroll (progressive; content stays visible if JS/observer is unavailable) */
+  const home = $('.gx-home');
+  if (home && 'IntersectionObserver' in window && !prefersReduced) {
+    const targets = $$('.gx-benefit, .gx-catrow, .gx-promo, .gx-brandrow, .gx-cta__inner, .gx-section .gx-head', home);
+    if (targets.length) {
+      home.classList.add('gx-animate');
+      targets.forEach((el) => el.classList.add('gx-reveal'));
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); obs.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach((el) => io.observe(el));
+    }
+  }
 })();
