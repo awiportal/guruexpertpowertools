@@ -25,6 +25,14 @@ final class Setup {
 		add_action( 'after_setup_theme', array( $this, 'image_sizes' ) );
 		add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
 		add_action( 'after_setup_theme', array( $this, 'migrate_theme_mods' ), 5 );
+		// Keep business identity consistent: rewrite the legacy name in displayed content + schema.
+		add_filter( 'the_title', array( $this, 'rebrand' ), 20 );
+		add_filter( 'the_content', array( $this, 'rebrand' ), 20 );
+		add_filter( 'get_the_excerpt', array( $this, 'rebrand' ), 20 );
+		add_filter( 'woocommerce_short_description', array( $this, 'rebrand' ), 20 );
+		add_filter( 'woocommerce_product_get_name', array( $this, 'rebrand' ), 20 );
+		add_filter( 'woocommerce_product_get_description', array( $this, 'rebrand' ), 20 );
+		add_filter( 'woocommerce_product_get_short_description', array( $this, 'rebrand' ), 20 );
 	}
 
 	/**
@@ -101,12 +109,30 @@ final class Setup {
 				'toptech_whatsapp' => 'guruexpertpowertools_whatsapp',
 			);
 			foreach ( $map as $old => $new ) {
-				if ( array_key_exists( $old, $mods ) && \! array_key_exists( $new, $mods ) ) {
+				if ( array_key_exists( $old, $mods ) && ! array_key_exists( $new, $mods ) ) {
 					set_theme_mod( $new, $mods[ $old ] );
 				}
 			}
 		}
 		update_option( 'guruexpertpowertools_modmigrated', 1 );
+	}
+
+	/**
+	 * Replace the legacy business name with the current one in output. Safety net that keeps
+	 * business identity consistent for shoppers and Google Merchant review until the product
+	 * database itself is updated.
+	 *
+	 * @param mixed $text Value passed by the filter.
+	 * @return mixed
+	 */
+	public function rebrand( $text ) {
+		if ( is_string( $text ) && stripos( (string) $text, 'toptech' ) === false ) {
+			return $text;
+		}
+		if ( is_string( $text ) ) {
+			$text = str_ireplace( 'TopTech Machinery', 'Guru Expert Power Tools', $text );
+		}
+		return $text;
 	}
 
 	public function register_sidebars(): void {
