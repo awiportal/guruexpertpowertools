@@ -41,11 +41,17 @@ $rk_whatsapp = get_theme_mod( 'guruexpertpowertools_whatsapp', '254708777192' );
 			<button class="rk-nav-toggle" aria-expanded="false" aria-controls="rk-primary-menu" aria-label="<?php esc_attr_e( 'Menu', 'guruexpertpowertools' ); ?>"><span class="rk-burger"></span></button>
 			<div class="rk-logo">
 				<?php
-				if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
-					the_custom_logo();
-				} else {
-					printf( '<a href="%s" style="color:#fff;font-weight:800;font-size:1.4rem">%s</a>', esc_url( home_url( '/' ) ), esc_html( get_bloginfo( 'name' ) ) );
+				$gx_logo_id  = (int) get_theme_mod( 'guruexpertpowertools_logo', 0 );
+				$gx_logo_url = $gx_logo_id ? wp_get_attachment_image_url( $gx_logo_id, 'full' ) : '';
+				if ( ! $gx_logo_url ) {
+					$gx_logo_url = get_theme_file_uri( 'assets/img/logo.png' );
 				}
+				printf(
+					'<a href="%s" class="rk-logo__link" rel="home"><img class="rk-logo__img" src="%s" alt="%s" /></a>',
+					esc_url( home_url( '/' ) ),
+					esc_url( $gx_logo_url ),
+					esc_attr( get_bloginfo( 'name' ) )
+				);
 				?>
 			</div>
 

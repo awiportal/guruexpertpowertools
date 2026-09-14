@@ -27,6 +27,16 @@ final class Customizer {
 	public function register( $wp_customize ): void {
 		$wp_customize->add_panel( 'guruexpertpowertools_panel', array( 'title' => __( 'Guru Expert Power Tools', 'guruexpertpowertools' ), 'priority' => 20 ) );
 
+		// Branding / header logo.
+		$wp_customize->add_section( 'guruexpertpowertools_branding', array( 'title' => __( 'Branding', 'guruexpertpowertools' ), 'panel' => 'guruexpertpowertools_panel', 'priority' => 1 ) );
+		$wp_customize->add_setting( 'guruexpertpowertools_logo', array( 'default' => 0, 'sanitize_callback' => 'absint', 'transport' => 'refresh' ) );
+		$wp_customize->add_control( new \WP_Customize_Media_Control( $wp_customize, 'guruexpertpowertools_logo', array(
+			'label'       => __( 'Brand Logo', 'guruexpertpowertools' ),
+			'description' => __( 'Upload your header logo (transparent PNG recommended). Leave empty to use the bundled logo.', 'guruexpertpowertools' ),
+			'section'     => 'guruexpertpowertools_branding',
+			'mime_type'   => 'image',
+		) ) );
+
 		// Colours.
 		$wp_customize->add_section( 'guruexpertpowertools_colors', array( 'title' => __( 'Brand Colours', 'guruexpertpowertools' ), 'panel' => 'guruexpertpowertools_panel' ) );
 		$this->color( $wp_customize, 'guruexpertpowertools_primary', '#208050', __( 'Primary (Green)', 'guruexpertpowertools' ) );
