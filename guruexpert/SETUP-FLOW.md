@@ -37,7 +37,7 @@ The demo loads a sample. To load your entire catalogue:
 with the same SKU are updated, not duplicated.
 
 ## Step 5 - Brand it
-- Upload your logo: Appearance -> Customize -> Site Identity (use `assets/img/logo.webp`).
+- Upload your logo: Appearance -> Customize -> Site Identity (use `assets/img/logo.png`; light-bg variant `assets/img/logo-onlight.png`, emblem `assets/img/logo-emblem.png`).
 - Colours + contact details: Customize -> Guru Expert Power Tools (green #208050 / deep green #0E2A1C,
   phone +254 708 777192, WhatsApp, email info@guruexpertpowertools.co.ke, Nairobi address).
 - Set the homepage: Settings -> Reading -> "Your homepage displays" is handled automatically,

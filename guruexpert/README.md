@@ -48,7 +48,7 @@ Built for **WordPress 6.5+**, **WooCommerce 9+**, **PHP 8.1+** (8.3 ready).
    > `inc/tgmpa/class-tgm-plugin-activation.php` (download from https://tgmpluginactivation.com/).
 3. On activation, all legal/info **Pages and menus are created automatically**. Edit any of them
    under **Pages** — the content is real, not placeholder.
-4. Upload your logo at **Appearance → Customize → Site Identity** (use the supplied `GURUEXPERTPOWERTOOLS-LOGO.webp`).
+4. Upload your logo at **Appearance → Customize → Site Identity** (use the supplied `assets/img/logo.png` (transparent). A light-background version `assets/img/logo-onlight.png` and a square emblem `assets/img/logo-emblem.png` are also included).
 5. Set brand colours + contact details under **Customize → Guru Expert Power Tools**.
 6. Import your products (see `IMPORT-PRODUCTS.md`).
 7. Set **Settings → Reading → Homepage displays → A static page** and pick a page, or leave the
