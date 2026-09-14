@@ -200,3 +200,26 @@
     syncCart();
   }
 })();
+
+
+/* Guru Expert: checkout delivery note (flat KSh 500 + heavy-machine notice) */
+(function(){
+  function gxInsertDeliveryNote(){
+    var body = document.body;
+    if (body && body.classList.contains('woocommerce-checkout')) {
+      if (document.querySelector('.gx-delivery-note')) { return; }
+      var target = document.querySelector('.wp-block-woocommerce-checkout') || document.querySelector('form.woocommerce-checkout') || document.querySelector('.woocommerce');
+      if (target && target.parentNode) {
+        var note = document.createElement('div');
+        note.className = 'gx-delivery-note';
+        note.innerHTML = '<strong>Delivery:</strong> Standard delivery is a flat KSh 500 anywhere in Kenya. Large or heavy machines (generators, welding machines, solar panels) may need special transport - we will confirm any extra cost with you by phone or WhatsApp before dispatch.';
+        target.parentNode.insertBefore(note, target);
+      }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', gxInsertDeliveryNote);
+  } else {
+    gxInsertDeliveryNote();
+  }
+})();

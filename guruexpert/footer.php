@@ -18,8 +18,14 @@ $rk_whatsapp = get_theme_mod( 'guruexpertpowertools_whatsapp', '254708777192' );
 		<div class="rk-footer__cols">
 			<div>
 				<h3><?php bloginfo( 'name' ); ?></h3>
-				<p><strong><?php esc_html_e( 'Address:', 'guruexpertpowertools' ); ?></strong><br><?php echo esc_html( $rk_address ); ?></p>
-				<p><a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $rk_phone ) ); ?>"><?php echo esc_html( $rk_phone ); ?></a> &middot; <a href="mailto:<?php echo esc_attr( $rk_email ); ?>"><?php echo esc_html( $rk_email ); ?></a></p>
+				<p class="rk-footer__tag"><?php esc_html_e( 'Genuine power tools, solar and hardware, delivered right across Kenya.', 'guruexpertpowertools' ); ?></p>
+				<ul class="rk-footer__contact">
+					<li><svg class="rk-fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span><?php echo esc_html( $rk_address ); ?></span></li>
+					<li><svg class="rk-fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7 12.8 12.8 0 0 0 .7 2.8 2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.1a2 2 0 0 1 2.1-.5 12.8 12.8 0 0 0 2.8.7 2 2 0 0 1 1.7 2z"/></svg><a href="tel:<?php echo esc_attr( str_replace( ' ', '', $rk_phone ) ); ?>"><?php echo esc_html( $rk_phone ); ?></a></li>
+					<li><svg class="rk-fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:<?php echo esc_attr( $rk_email ); ?>"><?php echo esc_html( $rk_email ); ?></a></li>
+					<li><svg class="rk-fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><?php esc_html_e( 'Mon - Sat, 9:00am - 5:00pm', 'guruexpertpowertools' ); ?></span></li>
+				</ul>
+				<a class="rk-footer__wa" href="https://wa.me/<?php echo esc_attr( $rk_whatsapp ); ?>" target="_blank" rel="noopener nofollow"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4C24.6 28.8 30 23.4 30 16.8 30 9.4 24.6 3 16 3zm0 23.6c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.3-.4C5.5 19 5 17 5 15c0-5.5 4.5-10 11-10s11 4.5 11 10-4.5 11.6-11 11.6zm6-8.3c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.8-1.9-1.1-2.6-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.8 5.1.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 2-.8 2.3-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.4z"/></svg><span><?php esc_html_e( 'Chat with us on WhatsApp', 'guruexpertpowertools' ); ?></span></a>
 			</div>
 			<div>
 				<h3><?php esc_html_e( 'Customer Service', 'guruexpertpowertools' ); ?></h3>
