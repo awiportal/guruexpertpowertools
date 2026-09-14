@@ -9,7 +9,7 @@ declare( strict_types = 1 );
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'GURUEXPERTPOWERTOOLS_VERSION', '1.21.1' );
+define( 'GURUEXPERTPOWERTOOLS_VERSION', '1.21.2' );
 define( 'GURUEXPERTPOWERTOOLS_DIR', trailingslashit( get_template_directory() ) );
 define( 'GURUEXPERTPOWERTOOLS_URI', trailingslashit( get_template_directory_uri() ) );
 
