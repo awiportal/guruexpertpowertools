@@ -165,3 +165,32 @@ body{background:var(--rk-bg)}
 .woocommerce #place_order,#place_order{color:#fff !important}
 /* Green category sidebar header, mirroring the reference design */
 .rk-vertcat h2{background:var(--rk-primary);color:#fff}
+
+/* ================= Mobile bottom navigation bar ================= */
+.gx-botnav{display:none;transition:transform .2s ease}
+@media(max-width:767px){
+  .gx-botnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:1000;justify-content:space-around;align-items:flex-end;
+    background:var(--rk-white);border-top:1px solid var(--rk-line);box-shadow:0 -6px 20px rgba(14,42,28,.12);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .gx-botnav__item{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 2px;
+    text-decoration:none;color:var(--rk-navy);font-size:.66rem;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+  .gx-botnav__item svg{width:23px;height:23px}
+  .gx-botnav__item:hover,.gx-botnav__item:focus-visible{color:var(--rk-primary)}
+  .gx-botnav__item>span:last-child{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .gx-botnav__ico{position:relative;display:inline-flex}
+  .gx-botnav__count{position:absolute;top:-7px;right:-10px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;
+    background:var(--rk-primary);color:#fff;font-size:.62rem;line-height:17px;text-align:center;font-weight:800}
+  .gx-botnav__count.is-empty{display:none}
+  .gx-botnav__item--wa{color:var(--rk-primary)}
+  .gx-botnav__wa{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-top:-18px;
+    border-radius:50%;background:#25D366;color:#fff;border:3px solid var(--rk-white);box-shadow:0 8px 18px rgba(37,211,102,.45)}
+  .gx-botnav__wa svg{width:24px;height:24px}
+  /* Keep page content clear of the fixed bar */
+  body{padding-bottom:64px}
+  /* Avoid clashing with existing floating controls / overlays on mobile */
+  .rk-whatsapp{display:none!important}
+  .rk-backtop{bottom:76px}
+  body.rk-noscroll .gx-botnav,
+  body.rk-sticky-on .gx-botnav{transform:translateY(110%)}
+}
+@media(prefers-reduced-motion:reduce){.gx-botnav{transition:none}}

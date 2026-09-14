@@ -185,4 +185,18 @@
       targets.forEach((el) => io.observe(el));
     }
   }
+
+  /* Keep the mobile bottom-nav cart badge in sync with the header cart count */
+  const botCart = $('.gx-botnav__count');
+  if (botCart) {
+    const syncCart = () => {
+      const src = $('.rk-header .rk-cart-count') || $('.rk-cart-count');
+      const n = src ? (src.getAttribute('data-count') || src.textContent || '0').trim() : '0';
+      botCart.textContent = n;
+      botCart.classList.toggle('is-empty', !n || n === '0');
+    };
+    on(document.body, 'wc_fragments_refreshed', syncCart);
+    on(document.body, 'added_to_cart', syncCart);
+    syncCart();
+  }
 })();
