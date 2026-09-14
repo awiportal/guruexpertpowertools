@@ -194,3 +194,23 @@ body{background:var(--rk-bg)}
   body.rk-sticky-on .gx-botnav{transform:translateY(110%)}
 }
 @media(prefers-reduced-motion:reduce){.gx-botnav{transition:none}}
+
+
+/* ================= Mobile product-card CTAs (Add to Cart + Order on WhatsApp) ================= */
+/* Narrow 2-up cards: keep "Add to Cart" on ONE line, match the two buttons as a tidy, tappable pair. */
+@media(max-width:600px){
+  .rk-card .rk-btn,
+  ul.products li.product a.button,
+  .woocommerce ul.products li.product a.button.add_to_cart_button,
+  .woocommerce a.button.add_to_cart_button{
+    margin-top:8px;padding:.62rem .5rem;font-size:.78rem;letter-spacing:.01em;
+    white-space:nowrap;line-height:1.1;min-height:42px}
+  .rk-wa-btn{margin-top:6px;padding:.55rem .5rem;font-size:.74rem;min-height:42px;gap:.3rem}
+  .rk-wa-btn svg{width:15px;height:15px}
+}
+@media(max-width:360px){
+  .rk-card .rk-btn,
+  ul.products li.product a.button,
+  .woocommerce a.button.add_to_cart_button{font-size:.72rem;letter-spacing:0;padding:.6rem .35rem}
+  .rk-wa-btn{font-size:.68rem;padding:.55rem .35rem}
+}
