@@ -71,12 +71,15 @@ $rk_whatsapp = get_theme_mod( 'guruexpertpowertools_whatsapp', '254708777192' );
 					<?php echo rk_icon( 'user' ); // phpcs:ignore ?>
 					<span><?php esc_html_e( 'Account', 'guruexpertpowertools' ); ?></span>
 				</a>
-				<a class="rk-actions__item" href="<?php echo esc_url( home_url( '/wishlist/' ) ); ?>">
-					<?php echo rk_icon( 'heart' ); // phpcs:ignore ?>
-					<span><?php esc_html_e( 'Wishlist', 'guruexpertpowertools' ); ?></span>
-				</a>
+				<?php
+				/*
+				 * The Wishlist action was removed: it pointed at a hardcoded /wishlist/ URL that
+				 * no template or plugin creates, so it was a guaranteed 404 for every shopper.
+				 * Restore it once a wishlist plugin is active and can supply the real permalink.
+				 */
+				?>
 				<?php if ( $rk_has_wc ) : ?>
-				<a class="rk-actions__item" href="<?php echo esc_url( $rk_cart_url ); ?>" data-rk-drawer-open>
+				<a class="rk-actions__item" href="<?php echo esc_url( $rk_cart_url ); ?>">
 					<?php echo rk_icon( 'cart' ); // phpcs:ignore ?>
 					<span class="rk-cart-count" data-count="<?php echo esc_attr( $rk_cart_ct ); ?>"><?php echo esc_html( $rk_cart_ct ); ?></span>
 					<span><?php esc_html_e( 'Cart', 'guruexpertpowertools' ); ?></span>
