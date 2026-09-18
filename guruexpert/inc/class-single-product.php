@@ -55,14 +55,18 @@ final class Single_Product {
 		echo '<div class="rk-pdp-delivery">';
 		echo $this->icon( '<rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle>' ); // phpcs:ignore
 		echo '<div><strong>' . esc_html__( 'Fast delivery across Kenya.', 'guruexpertpowertools' ) . '</strong><br>';
-		echo '<span>' . esc_html__( 'Nairobi: same/next-day. Countrywide: 1-3 business days. Order by phone/WhatsApp:', 'guruexpertpowertools' ) . ' ' . $phone . '</span></div>';
+		echo '<span>' . esc_html__( 'Nairobi: same/next-day. Countrywide: 1-5 business days, KSh 500 flat (bulky items quoted separately). Order by phone/WhatsApp:', 'guruexpertpowertools' ) . ' ' . $phone . '</span></div>';
 		echo '</div>';
 
 		// Trust badges.
 		echo '<ul class="rk-trust">';
 		$badges = array(
-			array( '<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"></path><path d="M9 12l2 2 4-4"></path>', __( '100% Genuine Products', 'guruexpertpowertools' ) ),
-			array( '<path d="M20 6L9 17l-5-5"></path>', __( 'Warranty Included', 'guruexpertpowertools' ) ),
+			// "100% Genuine Products" and "Warranty Included" were removed: both are absolute,
+			// unverifiable claims and the first is a direct Google Misrepresentation risk. The
+			// replacements are checkable -- the shop address is published in the footer, and the
+			// warranty is the manufacturer's, offered "where applicable" per the FAQ below.
+			array( '<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"></path><path d="M9 12l2 2 4-4"></path>', __( 'Walk-in Shop in Nairobi', 'guruexpertpowertools' ) ),
+			array( '<path d="M20 6L9 17l-5-5"></path>', __( 'Manufacturer Warranty', 'guruexpertpowertools' ) ),
 			array( '<rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>', __( 'Secure Checkout', 'guruexpertpowertools' ) ),
 			array( '<path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path><path d="M12 7v5l3 2"></path>', __( 'Responsive Support', 'guruexpertpowertools' ) ),
 		);
@@ -112,9 +116,13 @@ final class Single_Product {
 	public function faq_tab(): void {
 		$phone = esc_html( get_theme_mod( 'guruexpertpowertools_phone', '+254 708 777192' ) );
 		$faqs  = array(
-			array( __( 'How soon can I get this delivered?', 'guruexpertpowertools' ), __( 'Nairobi orders are typically delivered same or next business day. Other towns take 1-3 business days. Confirm timing on checkout or by calling us.', 'guruexpertpowertools' ) ),
+			array( __( 'How soon can I get this delivered?', 'guruexpertpowertools' ), __( 'Nairobi orders are typically delivered same or next business day. Other towns take 1-5 business days. Delivery is KSh 500 flat countrywide; bulky items are quoted separately and confirmed before dispatch.', 'guruexpertpowertools' ) ),
 			array( __( 'How do I pay?', 'guruexpertpowertools' ), __( 'We accept M-PESA, Visa, Mastercard and cash on delivery where available. All online payments are processed securely.', 'guruexpertpowertools' ) ),
-			array( __( 'Is this product genuine and covered by warranty?', 'guruexpertpowertools' ), __( 'Yes. We stock only genuine products from authorised suppliers, backed by the manufacturer warranty where applicable.', 'guruexpertpowertools' ) ),
+			// Sourcing claim softened from "only genuine products": an absolute, unverifiable
+			// assertion about every one of 845 lines is a Google Misrepresentation risk. The
+			// revised wording describes the sourcing channel, which is checkable, without
+			// guaranteeing authenticity of each individual item.
+			array( __( 'Is this product covered by warranty?', 'guruexpertpowertools' ), __( 'We source our stock from authorised distributors and suppliers, and items are backed by the manufacturer warranty where applicable. Ask us about the warranty terms for a specific product before you buy.', 'guruexpertpowertools' ) ),
 			array( __( 'Can I return it if there is a problem?', 'guruexpertpowertools' ), __( 'Faulty or incorrect items can be returned within 7 days. See our Return & Refund Policy for details.', 'guruexpertpowertools' ) ),
 			array( __( 'How do I get help before buying?', 'guruexpertpowertools' ), __( 'Call or WhatsApp us and our team will help you choose the right tool for the job.', 'guruexpertpowertools' ) . ' ' . $phone ),
 		);

@@ -41,7 +41,7 @@ $rk_whatsapp = get_theme_mod( 'guruexpertpowertools_whatsapp', '254708777192' );
 					<span>M-PESA</span><span>Visa</span><span>Mastercard</span><span>Cash on Delivery</span>
 				</div>
 				<h3 style="margin-top:18px"><?php esc_html_e( 'Secure Shopping', 'guruexpertpowertools' ); ?></h3>
-				<div class="rk-payments"><span>SSL Secured</span><span>Verified Business</span></div>
+				<div class="rk-payments"><span>SSL Secured</span><span><?php esc_html_e( 'Walk-in Shop in Nairobi', 'guruexpertpowertools' ); ?></span></div>
 			</div>
 		</div>
 	</div>
