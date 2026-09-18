@@ -23,6 +23,7 @@ final class Assets {
 		add_filter( 'style_loader_tag', array( $this, 'async_font_css' ), 10, 4 );
 		// Trim WooCommerce bloat on non-woo pages (perf).
 		add_action( 'wp_enqueue_scripts', array( $this, 'dequeue_woo_bloat' ), 99 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'dequeue_unused_plugin_css' ), 100 );
 			add_action( 'init', array( $this, 'trim_head' ) );
 	}
 
@@ -122,6 +123,68 @@ final class Assets {
 		}
 		if ( ! is_woocommerce() && ! is_cart() && ! is_checkout() && ! is_account_page() ) {
 			wp_dequeue_style( 'wc-blocks-style' );
+		}
+	}
+
+	/**
+	 * Drop plugin CSS that the storefront templates never actually use.
+	 *
+	 * Measured against the live markup on the front page, shop archive and a
+	 * single product: zero wp-block-* classes and zero Contact Form 7 form
+	 * markup on any of them, so both stylesheets were pure render-blocking
+	 * weight. (The site is built with Elementor, which is why Gutenberg's
+	 * block styles are dead weight here.)
+	 *
+	 * Scope is deliberately narrow rather than site-wide:
+	 * - Cart, checkout and account bail out early: WooCommerce Blocks on those
+	 *   screens depends on block-library styles, and removing it breaks layout.
+	 * - WooCommerce's own core stylesheets are intentionally NOT touched. The
+	 *   front page renders real product loops (48 li.product items), so
+	 *   dequeuing them would risk the grid even though the theme restyles
+	 *   those selectors.
+	 */
+	public function dequeue_unused_plugin_css(): void {
+		if ( is_admin() ) {
+			return;
+		}
+
+		// WooCommerce Blocks on these screens rely on block-library CSS.
+		if ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() || is_account_page() ) ) {
+			return;
+		}
+
+		// Only the contexts actually measured.
+		$is_storefront = is_front_page();
+		if ( function_exists( 'is_shop' ) ) {
+			$is_storefront = $is_storefront || is_shop() || is_product() || is_product_category() || is_product_tag();
+		}
+		if ( false === $is_storefront ) {
+			return;
+		}
+
+		$post = get_post();
+
+		// Gutenberg styles: keep them if the page genuinely contains blocks.
+		if ( ( ! $post instanceof \WP_Post ) || ( ! has_blocks( $post ) ) ) {
+			wp_dequeue_style( 'wp-block-library' );
+			wp_dequeue_style( 'wp-block-library-theme' );
+		}
+
+		// Contact Form 7: keep the CSS wherever a form is embedded. Elementor
+		// stores its widgets outside post_content, so check that payload too
+		// before concluding the page has no form.
+		$has_form = false;
+		if ( $post instanceof \WP_Post ) {
+			$has_form = has_shortcode( (string) $post->post_content, 'contact-form-7' );
+			if ( false === $has_form ) {
+				$elementor = get_post_meta( $post->ID, '_elementor_data', true );
+				if ( is_string( $elementor ) && false !== strpos( $elementor, 'contact-form-7' ) ) {
+					$has_form = true;
+				}
+			}
+		}
+		if ( false === $has_form ) {
+			wp_dequeue_style( 'contact-form-7' );
 		}
 	}
 
