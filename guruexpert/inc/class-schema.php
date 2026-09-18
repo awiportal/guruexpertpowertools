@@ -23,7 +23,9 @@ final class Schema {
 		add_action( 'wp_head', array( $this, 'organization' ), 5 );
 		add_action( 'wp_head', array( $this, 'website' ), 6 );
 		add_action( 'wp_head', array( $this, 'breadcrumb' ), 7 );
-		add_action( 'wp_footer', array( $this, 'product' ), 20 );
+		// Product JSON-LD belongs in <head>: more reliable parsing, and it survives
+		// aggressive full-page caching (LiteSpeed) that can truncate late footer output.
+		add_action( 'wp_head', array( $this, 'product' ), 8 );
 	}
 
 	/**
@@ -78,7 +80,18 @@ final class Schema {
 	private function meta_description(): string {
 		$d = '';
 		if ( is_front_page() || is_home() ) {
-			$d = get_bloginfo( 'description' );
+			/*
+			 * The homepage previously fell back to the site tagline, which is usually too
+			 * short to be useful as a search snippet. Use a real description, overridable
+			 * in the Customizer or via filter, and fall back to the tagline only if blank.
+			 */
+			$d = (string) get_theme_mod(
+				'guruexpertpowertools_home_description',
+				__( 'Buy genuine power tools, solar equipment and hardware in Kenya. Total, Ingco, Makita, Bosch, DeWalt and Honda from authorised distributors, with warranty and countrywide delivery from our Tom Mboya Street shop in Nairobi.', 'guruexpertpowertools' )
+			);
+			if ( '' === trim( $d ) ) {
+				$d = get_bloginfo( 'description' );
+			}
 		} elseif ( function_exists( 'is_product' ) && is_product() ) {
 			$p = wc_get_product( get_queried_object_id() );
 			if ( $p instanceof \WC_Product ) {
@@ -178,7 +191,34 @@ final class Schema {
 				'addressRegion'   => 'Nairobi',
 				'addressCountry'  => 'KE',
 			),
+			'areaServed'              => array(
+				'@type' => 'Country',
+				'name'  => 'Kenya',
+			),
+			'priceRange'              => (string) get_theme_mod( 'guruexpertpowertools_price_range', 'KSh 500 - KSh 500,000' ),
+			'currenciesAccepted'      => 'KES',
+			'paymentAccepted'         => 'M-PESA, Cash, Bank Transfer, Credit Card',
+			'openingHoursSpecification' => array(
+				array(
+					'@type'     => 'OpeningHoursSpecification',
+					'dayOfWeek' => array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ),
+					'opens'     => '09:00',
+					'closes'    => '17:00',
+				),
+			),
 		);
+
+		/*
+		 * Social profiles strengthen entity recognition, but a wrong or dead sameAs URL is
+		 * worse than none. Left empty by default -- populate with the real Facebook,
+		 * Instagram and TikTok URLs via this filter or by editing the array.
+		 * Deliberately no "geo" block: inventing coordinates for Magomano House would put
+		 * a wrong pin on the map. Add it once the exact latitude/longitude is confirmed.
+		 */
+		$same_as = array_filter( (array) apply_filters( 'guruexpertpowertools_schema_same_as', array() ) );
+		if ( ! empty( $same_as ) ) {
+			$data['sameAs'] = array_values( array_map( 'esc_url_raw', $same_as ) );
+		}
 		$logo = get_theme_mod( 'custom_logo' );
 		if ( $logo ) {
 			$src = wp_get_attachment_image_src( (int) $logo, 'full' );
@@ -281,12 +321,19 @@ final class Schema {
 		}
 		global $product;
 		if ( ! $product instanceof \WC_Product ) {
-			$product = wc_get_product( get_the_ID() );
+			// In wp_head the loop has not started, so get_the_ID() is unreliable here.
+			$product = wc_get_product( get_queried_object_id() );
 		}
 		if ( ! $product instanceof \WC_Product ) {
 			return;
 		}
 
+		/*
+		 * Google Merchant Center and merchant-listing rich results expect an offer to
+		 * declare shipping and returns. Omitting them is a common cause of "missing
+		 * field" warnings in Merchant Center. Both blocks are filterable so the values
+		 * can be tuned without editing the theme -- see the two filters below.
+		 */
 		$data = array(
 			'@context'    => 'https://schema.org',
 			'@type'       => 'Product',
@@ -310,6 +357,8 @@ final class Schema {
 					'@type' => 'Organization',
 					'name'  => get_bloginfo( 'name' ),
 				),
+				'shippingDetails'         => $this->shipping_details(),
+				'hasMerchantReturnPolicy' => $this->return_policy(),
 			),
 		);
 		$gtin = get_post_meta( $product->get_id(), '_gtin', true );
@@ -340,6 +389,71 @@ final class Schema {
 			}
 		}
 		return (string) get_post_meta( $product->get_id(), '_powerplug_brand', true );
+	}
+
+	/**
+	 * Offer shipping details for merchant listings.
+	 *
+	 * IMPORTANT: the defaults below are placeholders and MUST be confirmed against the
+	 * live Shipping & Delivery page. Structured data that contradicts your real policy
+	 * triggers a Merchant Center mismatch, which is worse than declaring nothing. Adjust
+	 * via the guruexpertpowertools_schema_shipping_details filter or edit here.
+	 *
+	 * @return array
+	 */
+	private function shipping_details(): array {
+		return (array) apply_filters(
+			'guruexpertpowertools_schema_shipping_details',
+			array(
+				'@type'               => 'OfferShippingDetails',
+				'shippingRate'        => array(
+					'@type'    => 'MonetaryAmount',
+					'value'    => (string) get_theme_mod( 'guruexpertpowertools_ship_rate', '300' ),
+					'currency' => function_exists( 'get_woocommerce_currency' ) ? get_woocommerce_currency() : 'KES',
+				),
+				'shippingDestination' => array(
+					'@type'          => 'DefinedRegion',
+					'addressCountry' => 'KE',
+				),
+				'deliveryTime'        => array(
+					'@type'        => 'ShippingDeliveryTime',
+					'handlingTime' => array(
+						'@type'    => 'QuantitativeValue',
+						'minValue' => 0,
+						'maxValue' => 1,
+						'unitCode' => 'DAY',
+					),
+					'transitTime'  => array(
+						'@type'    => 'QuantitativeValue',
+						'minValue' => 1,
+						'maxValue' => 3,
+						'unitCode' => 'DAY',
+					),
+				),
+			)
+		);
+	}
+
+	/**
+	 * Merchant return policy for merchant listings.
+	 *
+	 * IMPORTANT: as with shipping above, the return window below is a placeholder and MUST
+	 * be reconciled with the live Return & Refund page before this ships to production.
+	 *
+	 * @return array
+	 */
+	private function return_policy(): array {
+		return (array) apply_filters(
+			'guruexpertpowertools_schema_return_policy',
+			array(
+				'@type'                => 'MerchantReturnPolicy',
+				'applicableCountry'    => 'KE',
+				'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+				'merchantReturnDays'   => (int) get_theme_mod( 'guruexpertpowertools_return_days', 7 ),
+				'returnMethod'         => 'https://schema.org/ReturnInStore',
+				'returnFees'           => 'https://schema.org/ReturnFeesCustomerResponsibleForShipping',
+			)
+		);
 	}
 
 	private function print_ld( array $data ): void {
