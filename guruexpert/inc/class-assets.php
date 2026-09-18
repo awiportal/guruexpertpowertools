@@ -20,6 +20,7 @@ final class Assets {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'wp_head', array( $this, 'preload_and_critical' ), 1 );
 		add_filter( 'script_loader_tag', array( $this, 'defer_scripts' ), 10, 3 );
+		add_filter( 'style_loader_tag', array( $this, 'async_font_css' ), 10, 4 );
 		// Trim WooCommerce bloat on non-woo pages (perf).
 		add_action( 'wp_enqueue_scripts', array( $this, 'dequeue_woo_bloat' ), 99 );
 			add_action( 'init', array( $this, 'trim_head' ) );
@@ -29,7 +30,11 @@ final class Assets {
 		$css_rel = file_exists( GURUEXPERTPOWERTOOLS_DIR . 'assets/css/theme.min.css' ) ? 'assets/css/theme.min.css' : 'assets/css/theme.css';
 		wp_enqueue_style( 'guruexpertpowertools-theme', GURUEXPERTPOWERTOOLS_URI . $css_rel, array(), GURUEXPERTPOWERTOOLS_VERSION );
 		wp_style_add_data( 'guruexpertpowertools-theme', 'rtl', 'replace' );
-		wp_enqueue_style( 'guruexpertpowertools-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap', array(), null );
+		// Oswald 500/600 were requested but never used: every Oswald rule either declares
+		// 700 or inherits a heading weight of 700/800. Dropping them saves two font files.
+		// All five Inter weights are genuinely used (400 body default; 500/600/700/800
+		// appear 2/12/45/38 times in the CSS), so they are deliberately retained.
+		wp_enqueue_style( 'guruexpertpowertools-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap', array(), null );
 		wp_enqueue_style( 'guruexpertpowertools-industrial', GURUEXPERTPOWERTOOLS_URI . 'assets/css/theme-industrial.css', array( 'guruexpertpowertools-theme' ), GURUEXPERTPOWERTOOLS_VERSION );
 
 		// Homepage-only design layer.
@@ -73,6 +78,28 @@ final class Assets {
 			printf( '<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n", esc_url( GURUEXPERTPOWERTOOLS_URI . 'assets/img/slides/slide-power-tools.jpg' ) );
 		}
 		echo '<style id="guruexpertpowertools-critical">:root{--rk-primary:#208050;--rk-navy:#0E2A1C}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1a1f2e;background:#fff}.rk-header{background:var(--rk-navy)}img{max-width:100%;height:auto}</style>' . "\n";
+	}
+
+	/**
+	 * Load the Google Fonts stylesheet without blocking first paint.
+	 *
+	 * The font CSS sits on a third-party origin, so requesting it as a normal
+	 * stylesheet blocks rendering until it resolves. "display=swap" only governs
+	 * how the font FILE swaps in; it does nothing for this CSS request. Fetching
+	 * it as media="print" and promoting it to "all" on load keeps it off the
+	 * critical path, and the inline critical CSS above renders text in the system
+	 * stack until Inter arrives. The noscript copy preserves the fonts when
+	 * JavaScript is unavailable.
+	 */
+	public function async_font_css( $tag, $handle, $href = '', $media = '' ) {
+		if ( 'guruexpertpowertools-fonts' === $handle && is_string( $tag ) && is_string( $href ) && '' !== $href ) {
+			return sprintf(
+				'<link rel="stylesheet" id="guruexpertpowertools-fonts-css" href="%1$s" media="print" onload="this.media=\'all\';this.onload=null;">' . "\n"
+				. '<noscript><link rel="stylesheet" href="%1$s"></noscript>' . "\n",
+				esc_url( $href )
+			);
+		}
+		return $tag;
 	}
 
 	/**
