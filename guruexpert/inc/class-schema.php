@@ -394,10 +394,12 @@ final class Schema {
 	/**
 	 * Offer shipping details for merchant listings.
 	 *
-	 * IMPORTANT: the defaults below are placeholders and MUST be confirmed against the
-	 * live Shipping & Delivery page. Structured data that contradicts your real policy
-	 * triggers a Merchant Center mismatch, which is worse than declaring nothing. Adjust
-	 * via the guruexpertpowertools_schema_shipping_details filter or edit here.
+	 * Confirmed policy: KSh 500 flat delivery countrywide. Bulky items are quoted and
+	 * communicated separately, and that exception cannot be expressed in a single flat
+	 * shippingRate -- declaring the 500 standard rate is correct for the catalogue at
+	 * large. If bulky lines are later split out, give them a per-product override via
+	 * the guruexpertpowertools_schema_shipping_details filter rather than raising this
+	 * baseline, so the common case keeps advertising the real price.
 	 *
 	 * @return array
 	 */
@@ -408,13 +410,19 @@ final class Schema {
 				'@type'               => 'OfferShippingDetails',
 				'shippingRate'        => array(
 					'@type'    => 'MonetaryAmount',
-					'value'    => (string) get_theme_mod( 'guruexpertpowertools_ship_rate', '300' ),
+					'value'    => (string) get_theme_mod( 'guruexpertpowertools_ship_rate', '500' ),
 					'currency' => function_exists( 'get_woocommerce_currency' ) ? get_woocommerce_currency() : 'KES',
 				),
 				'shippingDestination' => array(
 					'@type'          => 'DefinedRegion',
 					'addressCountry' => 'KE',
 				),
+				/*
+				 * Kept in step with the homepage trust band, which advertises "Dispatched
+				 * from our Nairobi shop in 1-5 days". Handling 0-1 plus transit 1-4 gives
+				 * the same 1-5 day end-to-end window. If the visible copy changes, change
+				 * this too: Merchant Center compares the two and flags a mismatch.
+				 */
 				'deliveryTime'        => array(
 					'@type'        => 'ShippingDeliveryTime',
 					'handlingTime' => array(
@@ -426,7 +434,7 @@ final class Schema {
 					'transitTime'  => array(
 						'@type'    => 'QuantitativeValue',
 						'minValue' => 1,
-						'maxValue' => 3,
+						'maxValue' => 4,
 						'unitCode' => 'DAY',
 					),
 				),
