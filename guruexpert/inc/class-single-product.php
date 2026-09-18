@@ -77,7 +77,7 @@ final class Single_Product {
 
 		// Payment methods.
 		echo '<div class="rk-pdp-pay"><span class="rk-pdp-pay__label">' . esc_html__( 'We accept:', 'guruexpertpowertools' ) . '</span>';
-		foreach ( array( 'M-PESA', 'Visa', 'Mastercard', 'Cash on Delivery' ) as $pay ) {
+		foreach ( array( 'M-PESA', 'Visa', 'Mastercard', 'Cash on Delivery (Nairobi)' ) as $pay ) {
 			echo '<span class="rk-pay-chip">' . esc_html( $pay ) . '</span>';
 		}
 		echo '</div>';
@@ -117,7 +117,7 @@ final class Single_Product {
 		$phone = esc_html( get_theme_mod( 'guruexpertpowertools_phone', '+254 708 777192' ) );
 		$faqs  = array(
 			array( __( 'How soon can I get this delivered?', 'guruexpertpowertools' ), __( 'Nairobi orders are typically delivered same or next business day. Other towns take 1-5 business days. Delivery is KSh 500 flat countrywide; bulky items are quoted separately and confirmed before dispatch.', 'guruexpertpowertools' ) ),
-			array( __( 'How do I pay?', 'guruexpertpowertools' ), __( 'We accept M-PESA, Visa, Mastercard and cash on delivery where available. All online payments are processed securely.', 'guruexpertpowertools' ) ),
+			array( __( 'How do I pay?', 'guruexpertpowertools' ), __( 'We accept M-PESA, Visa and Mastercard countrywide. Cash on delivery is available within Nairobi only; orders outside Nairobi are paid for before dispatch. All online payments are processed securely.', 'guruexpertpowertools' ) ),
 			// Sourcing claim softened from "only genuine products": an absolute, unverifiable
 			// assertion about every one of 845 lines is a Google Misrepresentation risk. The
 			// revised wording describes the sourcing channel, which is checkable, without

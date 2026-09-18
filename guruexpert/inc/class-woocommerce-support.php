@@ -670,7 +670,7 @@ final class WooCommerce_Support {
 			__( 'M-PESA', 'guruexpertpowertools' ),
 			__( 'Visa', 'guruexpertpowertools' ),
 			__( 'Mastercard', 'guruexpertpowertools' ),
-			__( 'Cash on Delivery', 'guruexpertpowertools' ),
+			__( 'Cash on Delivery (Nairobi)', 'guruexpertpowertools' ),
 		);
 		$out = '<div class="rk-payments rk-payments--checkout">';
 		foreach ( $methods as $m ) {
@@ -702,7 +702,7 @@ final class WooCommerce_Support {
 	 */
 	public function cart_trust(): void {
 		echo '<div class="rk-cart-trust">';
-		echo '<p class="rk-secure-note">' . $this->lock_icon() . '<span>' . esc_html__( 'Secure checkout. M-PESA, cards and cash on delivery accepted.', 'guruexpertpowertools' ) . '</span></p>';
+		echo '<p class="rk-secure-note">' . $this->lock_icon() . '<span>' . esc_html__( 'Secure checkout. M-PESA and cards accepted countrywide; cash on delivery within Nairobi.', 'guruexpertpowertools' ) . '</span></p>';
 		echo '</div>';
 	}
 
