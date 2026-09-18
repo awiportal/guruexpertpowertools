@@ -20,6 +20,12 @@ $guruexpertpowertools_modules = array(
 	'GuruExpertPowerTools\\Customizer',
 	'GuruExpertPowerTools\\Schema',
 	/*
+	 * Cookie_Consent must be registered so its wp_head priority 1 hook runs before the
+	 * Google for WooCommerce consent tag. The autoloader maps Cookie_Consent to
+	 * inc/class-cookie-consent.php.
+	 */
+	'GuruExpertPowerTools\\Cookie_Consent',
+	/*
 	 * Content_Installer and Demo_Import are not yet implemented -- inc/class-content-installer.php
 	 * and inc/class-demo-import.php are empty placeholders. The class_exists() guard below meant
 	 * they failed silently while README.md advertised them as working features. Re-add them here

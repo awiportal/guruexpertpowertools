@@ -48,6 +48,8 @@ $rk_whatsapp = get_theme_mod( 'guruexpertpowertools_whatsapp', '254708777192' );
 	<div class="rk-footer__bar">
 		<div class="container">
 			&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'All rights reserved.', 'guruexpertpowertools' ); ?>
+			<?php /* Lets visitors withdraw or change consent after the banner is dismissed, which the DPA 2019 requires. */ ?>
+			<a class="rk-footer__cookies" href="#" data-gxpt-cc-open><?php esc_html_e( 'Cookie settings', 'guruexpertpowertools' ); ?></a>
 		</div>
 	</div>
 </footer>
