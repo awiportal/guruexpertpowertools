@@ -20,10 +20,14 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		<a href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr( $product->get_name() ); ?>">
 			<?php echo $product->get_image( 'guruexpertpowertools-card', array( 'loading' => 'lazy', 'decoding' => 'async' ) ); // phpcs:ignore ?>
 		</a>
-		<div class="rk-card__actions">
-			<button type="button" class="rk-icon-btn rk-wishlist" data-id="<?php echo esc_attr( $product->get_id() ); ?>" aria-label="<?php esc_attr_e( 'Add to wishlist', 'guruexpertpowertools' ); ?>">&#9825;</button>
-			<a class="rk-icon-btn rk-quickview" href="<?php the_permalink(); ?>" aria-label="<?php esc_attr_e( 'Quick view', 'guruexpertpowertools' ); ?>">&#128065;</a>
-		</div>
+		<?php
+		/*
+		 * The wishlist and quick-view hover buttons were removed: the wishlist button persisted
+		 * nothing and "quick view" was a plain link to the product page the card already links to.
+		 * Controls that look interactive but do nothing cost shopper trust. Re-introduce them when
+		 * a real wishlist plugin and the AJAX quick-view modal land (ROADMAP.md phases 3 and 4).
+		 */
+		?>
 	</div>
 
 	<a href="<?php the_permalink(); ?>" class="rk-card__title"><?php echo esc_html( $product->get_name() ); ?></a>

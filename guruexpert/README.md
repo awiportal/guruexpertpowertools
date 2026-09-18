@@ -16,8 +16,9 @@ Built for **WordPress 6.5+**, **WooCommerce 9+**, **PHP 8.1+** (8.3 ready).
   category menu, "Shop by Category" cards with live product counts, and **one product row per
   category** (6 products each) with a *View more* link.
 - **Uniform product cards**: 1:1 lazy-loaded images, 2-line title clamp, 3-line description
-  clamp, sale/stock/featured badges, star ratings, **AJAX Add to Cart** (no reload), quick view
-  + wishlist on hover. No Compare button on the homepage (as specified).
+  clamp, sale/stock/featured badges, star ratings, **AJAX Add to Cart** (no reload), and an
+  "Order on WhatsApp" button. No Compare button on the homepage (as specified).
+  > Quick view and wishlist are **not** implemented yet (see `ROADMAP.md` phases 3 and 4).
 - **AJAX**: secure add-to-cart, mini-cart count fragments, and debounced live search — every
   endpoint nonce-verified, input-sanitised, output-escaped.
 - **Footer**: company info, customer service + policy menus, accepted payments (M-PESA, cards,

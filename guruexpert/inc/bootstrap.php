@@ -19,8 +19,12 @@ $guruexpertpowertools_modules = array(
 	'GuruExpertPowerTools\\Ajax',
 	'GuruExpertPowerTools\\Customizer',
 	'GuruExpertPowerTools\\Schema',
-	'GuruExpertPowerTools\\Content_Installer',
-	'GuruExpertPowerTools\\Demo_Import',
+	/*
+	 * Content_Installer and Demo_Import are not yet implemented -- inc/class-content-installer.php
+	 * and inc/class-demo-import.php are empty placeholders. The class_exists() guard below meant
+	 * they failed silently while README.md advertised them as working features. Re-add them here
+	 * once the classes actually exist. See ROADMAP.md phase 5.
+	 */
 	'GuruExpertPowerTools\\Single_Product',
 		'GuruExpertPowerTools\\Merchant_Inspector',
 );
