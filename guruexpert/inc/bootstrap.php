@@ -47,6 +47,14 @@ $guruexpertpowertools_modules = array(
 	 * Whatsapp_Tracking to inc/class-whatsapp-tracking.php.
 	 */
 	'GuruExpertPowerTools\\Whatsapp_Tracking',
+	/*
+	 * Google Analytics 4. The property (G-J98C50VRME) existed but the site was never
+	 * tagged, so GA4 reported "No data received" and the Ads remarketing audience sat
+	 * at zero. Hooks wp_head at priority 2, after Cookie_Consent's Consent Mode denied
+	 * defaults at priority 1. Stands itself down if Site Kit ever connects Analytics,
+	 * to avoid double-counting. The autoloader maps Analytics to inc/class-analytics.php.
+	 */
+	'GuruExpertPowerTools\\Analytics',
 );
 
 foreach ( $guruexpertpowertools_modules as $guruexpertpowertools_class ) {
