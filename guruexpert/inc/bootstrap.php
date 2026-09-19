@@ -33,6 +33,13 @@ $guruexpertpowertools_modules = array(
 	 */
 	'GuruExpertPowerTools\\Single_Product',
 		'GuruExpertPowerTools\\Merchant_Inspector',
+	/*
+	 * Google Customer Reviews. Two integrations in one module: the opt-in survey,
+	 * which the programme requires and which renders only on the order-received
+	 * page, and the optional seller-rating badge on the storefront. The autoloader
+	 * maps Google_Customer_Reviews to inc/class-google-customer-reviews.php.
+	 */
+	'GuruExpertPowerTools\\Google_Customer_Reviews',
 );
 
 foreach ( $guruexpertpowertools_modules as $guruexpertpowertools_class ) {
