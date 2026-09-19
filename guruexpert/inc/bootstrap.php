@@ -40,6 +40,13 @@ $guruexpertpowertools_modules = array(
 	 * maps Google_Customer_Reviews to inc/class-google-customer-reviews.php.
 	 */
 	'GuruExpertPowerTools\\Google_Customer_Reviews',
+	/*
+	 * WhatsApp order-click conversion tracking. Reports WhatsApp taps to Google Ads as
+	 * the SECONDARY "WhatsApp Order Click" action, so chat-placed orders are visible in
+	 * reporting without steering Performance Max bidding. The autoloader maps
+	 * Whatsapp_Tracking to inc/class-whatsapp-tracking.php.
+	 */
+	'GuruExpertPowerTools\\Whatsapp_Tracking',
 );
 
 foreach ( $guruexpertpowertools_modules as $guruexpertpowertools_class ) {
