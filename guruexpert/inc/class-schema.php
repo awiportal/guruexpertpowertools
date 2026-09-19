@@ -26,6 +26,41 @@ final class Schema {
 		// Product JSON-LD belongs in <head>: more reliable parsing, and it survives
 		// aggressive full-page caching (LiteSpeed) that can truncate late footer output.
 		add_action( 'wp_head', array( $this, 'product' ), 8 );
+
+		/*
+		 * WooCommerce core emits its OWN Product and BreadcrumbList JSON-LD into a
+		 * footer @graph, duplicating what this class already outputs in <head>. Two
+		 * Product entities on one page is precisely what raises "Product snippets
+		 * structured data issues" in Search Console: Google cannot decide which is
+		 * canonical. Verified on 19 Sep 2026 -- every product page carried 4 JSON-LD
+		 * blocks containing 2 Product objects and 2 BreadcrumbList objects.
+		 *
+		 * This theme's Product block is the one retained, because it carries
+		 * shippingDetails, hasMerchantReturnPolicy, itemCondition and mpn. WooCommerce's
+		 * version has none of those, and all four matter for merchant listings.
+		 *
+		 * Guarded on has_seo_plugin(): when a dedicated SEO plugin is active this class
+		 * emits nothing at all, so WooCommerce's copy must be left in place rather than
+		 * stripping it and leaving the page with no Product markup whatsoever.
+		 */
+		if ( ! $this->has_seo_plugin() ) {
+			add_filter( 'woocommerce_structured_data_product', array( $this, 'drop_duplicate_woo_schema' ) );
+			add_filter( 'woocommerce_structured_data_breadcrumblist', array( $this, 'drop_duplicate_woo_schema' ) );
+		}
+	}
+
+	/**
+	 * Remove a WooCommerce structured-data block that this theme already emits.
+	 *
+	 * Returning an empty array drops the block from WooCommerce's @graph output
+	 * without disturbing any other structured data it generates.
+	 *
+	 * @param mixed $data WooCommerce structured data for the block.
+	 * @return array Always empty.
+	 */
+	public function drop_duplicate_woo_schema( $data ): array {
+		unset( $data );
+		return array();
 	}
 
 	/**
