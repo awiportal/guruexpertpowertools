@@ -55,7 +55,7 @@ final class Single_Product {
 		echo '<div class="rk-pdp-delivery">';
 		echo $this->icon( '<rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle>' ); // phpcs:ignore
 		echo '<div><strong>' . esc_html__( 'Fast delivery across Kenya.', 'guruexpertpowertools' ) . '</strong><br>';
-		echo '<span>' . esc_html__( 'Nairobi: same/next-day. Countrywide: 1-5 business days, KSh 500 flat (bulky items quoted separately). Order by phone/WhatsApp:', 'guruexpertpowertools' ) . ' ' . $phone . '</span></div>';
+		echo '<span>' . esc_html__( 'Nairobi: same/next-day. Countrywide: 1-5 business days, KSh 500 flat on every order. Order by phone/WhatsApp:', 'guruexpertpowertools' ) . ' ' . $phone . '</span></div>';
 		echo '</div>';
 
 		// Trust badges.
@@ -116,7 +116,7 @@ final class Single_Product {
 	public function faq_tab(): void {
 		$phone = esc_html( get_theme_mod( 'guruexpertpowertools_phone', '+254 708 777192' ) );
 		$faqs  = array(
-			array( __( 'How soon can I get this delivered?', 'guruexpertpowertools' ), __( 'Nairobi orders are typically delivered same or next business day. Other towns take 1-5 business days. Delivery is KSh 500 flat countrywide; bulky items are quoted separately and confirmed before dispatch.', 'guruexpertpowertools' ) ),
+			array( __( 'How soon can I get this delivered?', 'guruexpertpowertools' ), __( 'Nairobi orders are typically delivered same or next business day. Other towns take 1-5 business days. Delivery is KSh 500 flat countrywide on every order, including bulky items.', 'guruexpertpowertools' ) ),
 			array( __( 'How do I pay?', 'guruexpertpowertools' ), __( 'Online orders are paid by M-PESA, or by cash on delivery within Nairobi only; orders outside Nairobi are paid by M-PESA before dispatch. Visa and Mastercard are accepted in person at our Nairobi shop, not at online checkout.', 'guruexpertpowertools' ) ),
 			// Sourcing claim softened from "only genuine products": an absolute, unverifiable
 			// assertion about every one of 845 lines is a Google Misrepresentation risk. The

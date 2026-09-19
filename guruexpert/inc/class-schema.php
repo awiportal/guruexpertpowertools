@@ -394,11 +394,12 @@ final class Schema {
 	/**
 	 * Offer shipping details for merchant listings.
 	 *
-	 * Confirmed policy: KSh 500 flat delivery countrywide. Bulky items are quoted and
-	 * communicated separately, and that exception cannot be expressed in a single flat
-	 * shippingRate -- declaring the 500 standard rate is correct for the catalogue at
-	 * large. If bulky lines are later split out, give them a per-product override via
-	 * the guruexpertpowertools_schema_shipping_details filter rather than raising this
+	 * Confirmed policy: KSh 500 flat delivery countrywide on every order, including
+	 * bulky machinery. The merchant absorbs the difference on oversized items rather
+	 * than quoting them separately, so a single flat shippingRate is accurate for the
+	 * whole catalogue and matches the KSh 500 service configured in Merchant Center.
+	 * If that ever changes, give bulky lines a per-product override via the
+	 * guruexpertpowertools_schema_shipping_details filter rather than raising this
 	 * baseline, so the common case keeps advertising the real price.
 	 *
 	 * @return array
