@@ -55,6 +55,20 @@ $guruexpertpowertools_modules = array(
 	 * to avoid double-counting. The autoloader maps Analytics to inc/class-analytics.php.
 	 */
 	'GuruExpertPowerTools\\Analytics',
+	/*
+	 * Google Tag Manager container GTM-TRK2HTXB. Hooks wp_head priority 3 -- after
+	 * Cookie_Consent's Consent Mode defaults (1) and Analytics (2) -- NOT "as high in
+	 * the head as possible" as Google's install screen instructs, because a container
+	 * that loads before the denied-by-default consent signals starts firing as though
+	 * consent were granted. The noscript iframe hooks wp_body_open, which header.php
+	 * calls immediately after <body>. The autoloader maps Tag_Manager to
+	 * inc/class-tag-manager.php.
+	 *
+	 * WARNING: GA4 (G-J98C50VRME), the WhatsApp click conversion and the WooCommerce
+	 * purchase conversion are already fired by this theme. Do not also create them as
+	 * tags inside GTM -- that doubles every hit and corrupts Performance Max bidding.
+	 */
+	'GuruExpertPowerTools\\Tag_Manager',
 );
 
 foreach ( $guruexpertpowertools_modules as $guruexpertpowertools_class ) {
