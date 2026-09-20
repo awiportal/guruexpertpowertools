@@ -120,9 +120,32 @@ final class Schema {
 			 * short to be useful as a search snippet. Use a real description, overridable
 			 * in the Customizer or via filter, and fall back to the tagline only if blank.
 			 */
+			/*
+			 * CLAIM-FREE BY DESIGN. The previous default opened with "Buy genuine power
+			 * tools ... from authorised distributors". Both are unverifiable assertions of
+			 * the exact type Google's Misrepresentation policy targets, and they survived
+			 * the product-level claim purge because that pass cleaned post content and
+			 * postmeta -- it never touched theme-level SEO defaults. The result was the
+			 * homepage, the most frequently crawled page on the site, still serving
+			 * "genuine" and "authorised distributors" in its description, og:description
+			 * and twitter:description long after every product had been cleaned.
+			 *
+			 * Keep this string descriptive and checkable: what is sold, which brands are
+			 * actually stocked, where the shop is, and how delivery works. No authenticity,
+			 * authorisation, superiority or guarantee wording.
+			 *
+			 * Brand names are retained deliberately and were verified against the live
+			 * sitemap on 20 Sep 2026 -- Makita 16, DeWalt 10, Honda 10, Bosch 4 products.
+			 * Naming a brand that is no longer stocked would itself be a misrepresentation,
+			 * so re-check before editing this list.
+			 *
+			 * Length matters: meta_description() truncates at 160 characters and appends an
+			 * ellipsis. This string is 149 characters so it renders whole. Keep any
+			 * replacement under 160 or it will be cut mid-sentence.
+			 */
 			$d = (string) get_theme_mod(
 				'guruexpertpowertools_home_description',
-				__( 'Buy genuine power tools, solar equipment and hardware in Kenya. Total, Ingco, Makita, Bosch, DeWalt and Honda from authorised distributors, with warranty and countrywide delivery from our Tom Mboya Street shop in Nairobi.', 'guruexpertpowertools' )
+				__( 'Power tools, solar and hardware in Kenya. Total, Ingco, Makita, Bosch, DeWalt and Honda, delivered countrywide from our Tom Mboya Street shop, Nairobi.', 'guruexpertpowertools' )
 			);
 			if ( '' === trim( $d ) ) {
 				$d = get_bloginfo( 'description' );
