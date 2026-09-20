@@ -35,9 +35,9 @@ $gx_slides = array(
 	array(
 		'img'      => GURUEXPERTPOWERTOOLS_URI . 'assets/img/slides/slide-power-tools.jpg',
 		'eyebrow'  => __( 'Power tools . Hardware', 'guruexpertpowertools' ),
-		'title'    => __( 'Genuine tools,', 'guruexpertpowertools' ),
+		'title'    => __( 'Power tools,', 'guruexpertpowertools' ),
 		'title_hl' => __( 'priced for Kenya', 'guruexpertpowertools' ),
-		'lead'     => __( 'Total, Ingco, Makita, Bosch and more - authorised stock, honest prices and quick delivery from our Tom Mboya Street shop to your door.', 'guruexpertpowertools' ),
+		'lead'     => __( 'Total, Ingco, Makita, Bosch and more - honest prices and quick delivery from our Tom Mboya Street shop to your door.', 'guruexpertpowertools' ),
 		'cta_url'  => $gx_shop,
 		'cta_text' => __( 'Shop all products', 'guruexpertpowertools' ),
 	),
@@ -63,7 +63,7 @@ $gx_slides = array(
 $gx_total = count( $gx_slides );
 ?>
 <section class="gx-hero-slider" data-gx-slider aria-roledescription="carousel" aria-label="<?php esc_attr_e( 'Featured highlights', 'guruexpertpowertools' ); ?>">
-	<h1 class="sr-only"><?php esc_html_e( 'Guru Expert Power Tools - genuine power tools, solar and hardware in Kenya', 'guruexpertpowertools' ); ?></h1>
+	<h1 class="sr-only"><?php esc_html_e( 'Guru Expert Power Tools - power tools, solar and hardware in Kenya', 'guruexpertpowertools' ); ?></h1>
 
 	<div class="gx-slides">
 		<?php foreach ( $gx_slides as $gx_i => $gx_s ) : ?>

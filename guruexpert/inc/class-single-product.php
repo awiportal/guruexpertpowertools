@@ -122,7 +122,7 @@ final class Single_Product {
 			// assertion about every one of 845 lines is a Google Misrepresentation risk. The
 			// revised wording describes the sourcing channel, which is checkable, without
 			// guaranteeing authenticity of each individual item.
-			array( __( 'Is this product covered by warranty?', 'guruexpertpowertools' ), __( 'We source our stock from authorised distributors and suppliers, and items are backed by the manufacturer warranty where applicable. Ask us about the warranty terms for a specific product before you buy.', 'guruexpertpowertools' ) ),
+			array( __( 'Is this product covered by warranty?', 'guruexpertpowertools' ), __( 'Items are backed by the manufacturer warranty where applicable. Ask us about the warranty terms for a specific product before you buy.', 'guruexpertpowertools' ) ),
 			array( __( 'Can I return it if there is a problem?', 'guruexpertpowertools' ), __( 'Faulty or incorrect items can be returned within 7 days. See our Return & Refund Policy for details.', 'guruexpertpowertools' ) ),
 			array( __( 'How do I get help before buying?', 'guruexpertpowertools' ), __( 'Call or WhatsApp us and our team will help you choose the right tool for the job.', 'guruexpertpowertools' ) . ' ' . $phone ),
 		);

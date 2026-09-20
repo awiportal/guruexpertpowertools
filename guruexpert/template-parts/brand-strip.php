@@ -13,7 +13,7 @@ $gx_brands = array( 'Total', 'Ingco', 'Makita', 'Bosch', 'DeWalt', 'Honda', 'Sol
 	<div class="container">
 		<div class="gx-head gx-head--center">
 			<div>
-				<p class="gx-head__eyebrow"><?php esc_html_e( 'Authorised stock', 'guruexpertpowertools' ); ?></p>
+				<p class="gx-head__eyebrow"><?php esc_html_e( 'Our brands', 'guruexpertpowertools' ); ?></p>
 				<h2><?php esc_html_e( 'Brands we stock', 'guruexpertpowertools' ); ?></h2>
 			</div>
 		</div>
